@@ -1,6 +1,6 @@
 <style>
   :root {
-  	--sheet-bg: #fff;
+    --sheet-bg: #fff;
     --lines-font-size: 13pt;
     --lines-padding: 5pt;
     --lines-thickness: 1pt;
@@ -17,16 +17,16 @@
     --hex-height: 50pt;
   }
   @page {
-  	size: A4;
+    size: A4;
     margin: 0;
   }
   * { box-sizing: border-box; }
   .sheet {
- 		display: flex;
+    display: flex;
     flex-direction: column;
   }
   body.A4 .sheet {
-  	width: 210mm;
+    width: 210mm;
     height: 297mm;
     padding: 10mm;
     overflow: hidden;
@@ -44,7 +44,7 @@
   }
   body {
     margin: 0;
-  	color: var(--dark-color);
+    color: var(--dark-color);
     font-family: Helvetica, Arial, sans-serif;
     font-size: 10pt;
   }
@@ -59,7 +59,7 @@
   .grid > .titled { padding-top: 1.7em; }
   .grid > .titled::before {
     font-size: var(--big-font);
-  	position: absolute;
+    position: absolute;
     top: 0;
     left: 50%;
     transform: translate(-50%, 0%);
@@ -73,23 +73,23 @@
     grid-template-rows: repeat(5,min-content) auto min-content min-content;
     grid-gap: 7pt;
   }
-  .logo							{ grid-column: 1 /  2; grid-row: 1; }
-  .head 						{ grid-column: 2 / 11; grid-row: 1; }
+  .logo                         { grid-column: 1 /  2; grid-row: 1; }
+  .head                         { grid-column: 2 / 11; grid-row: 1; }
 
- 	.attributes 			{ grid-column: 1 /  8; grid-row: 2; }
-  .defense 					{ grid-column: 1 /  5; grid-row: 3/5; }
+  .attributes             { grid-column: 1 /  8; grid-row: 2; }
+  .defense                  { grid-column: 1 /  5; grid-row: 3/5; }
   .proficiencies    { grid-column: 5 /  8; grid-row: 3; }
-  .movement					{ grid-column: 5 /  8; grid-row: 4; }
-  .skills 					{ grid-column: 8 / 11; grid-row: 2/6; }
-  .spell_stats			{ grid-column: 5 /  8; grid-row: 5; }
+  .movement                 { grid-column: 5 /  8; grid-row: 4; }
+  .skills                   { grid-column: 8 / 11; grid-row: 2/6; }
+  .spell_stats          { grid-column: 5 /  8; grid-row: 5; }
 
-  .attacks					{ grid-column: 1 /  5; grid-row: 5/7; }
+  .attacks                  { grid-column: 1 /  5; grid-row: 5/7; }
   .combat_options   { grid-column: 1 /  5; grid-row: 7; }
   .limited_features { grid-column: 1 /  5; grid-row: 8; }
   .traits           { grid-column: 5 / 11; grid-row: 6/9; }
 
   .hex_calc {
-  	--radius: calc(var(--hex-height)/2); /* circumcircle radius */
+    --radius: calc(var(--hex-height)/2); /* circumcircle radius */
     --border-color: var(--dark-color);
     --border-width: 1pt;
 
@@ -128,7 +128,7 @@
   }
 
   .reghex {
-  	width: var(--width);
+    width: var(--width);
     height: var(--height);
     background: var(--light-color);
     clip-path:
@@ -143,13 +143,13 @@
   }
 
   table {
-  	width: 100%;
+    width: 100%;
     border-spacing: var(--grey-padding) 0em;
   }
   table td, th { padding: 0; margin: 0 }
 
   input {
-  	background: transparent;
+    background: transparent;
     font-size: var(--normal-font);
   }
   /* general checkbox design:
@@ -157,7 +157,7 @@
    * `::after` displays the checkmark
    */
   input[type=checkbox] {
-  	display: inline-block;
+    display: inline-block;
     appearance: none;
     -moz-appearance: none;
     width: 1em;
@@ -190,7 +190,7 @@
   input[type=checkbox].prof::before { content: 'P' }
 
   input[type=text].grey {
-  	height: 1.5em;
+    height: 1.5em;
     width: 100%;
     padding: 0em 0.5em;
     margin: 0em;
@@ -199,18 +199,18 @@
     border-radius: 0.5em 0;
   }
   input[type=text].line {
-  	height: 1.5em;
-  	padding: 0 0.5em;
+    height: 1.5em;
+    padding: 0 0.5em;
     margin: 0;
-  	border: none;
+    border: none;
     border-bottom: 0.7pt solid var(--medium-light-color);
   }
   /*
   textarea {
-  	--font-size: var(--normal-font);
+    --font-size: var(--normal-font);
     --spacing: 1.5;
     --line-thickness: 0.7pt;
-  	width: 100%;
+    width: 100%;
     font-size: var(--font-size);
     font-family: Helvetica, Arial, sans-serif;
     border: none;
@@ -226,12 +226,12 @@
   }*/
 
   textarea {
-  	--font-size: var(--normal-font);
+    --font-size: var(--normal-font);
     --spacing: 1.5;
     --line-thickness: 0.7pt;
-  	width: 100%;
+    width: 100%;
     font-size: var(--font-size);
-  	height: 100px;
+    height: 100px;
     border: none;
     background-image:
       url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5 5"><rect x="0" y="4" width="5" height="1"/></svg>');
@@ -244,11 +244,11 @@
   }
 
   label.stack {
-  	display: flex;
+    display: flex;
     flex-direction: column;
   }
   label.stack > span, table th {
-  	font-size: var(--small-font);
+    font-size: var(--small-font);
     text-align: left;
     font-weight: normal;
     white-space: nowrap;
@@ -281,7 +281,7 @@
   .head label > input { width: 100% }
 
   .attributes {
-  	display: flex;
+    display: flex;
     justify-content: space-between;
   }
 
@@ -301,21 +301,21 @@
       radial-gradient(circle 15.3rem at 50% 150%, var(--light-color) 0% 33%, transparent 33% 100%),
       var(--medium-color)
       ;
-  	display: flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
 
   .attributes .attribute {
-  	--hex-height: 50pt;
-  	display: flex;
+    --hex-height: 50pt;
+    display: flex;
     flex-direction: column;
     align-items: center;
   }
   .attributes .attribute .stat {
-  	position: relative;
-		height: var(--hex-height);
+    position: relative;
+        height: var(--hex-height);
     width: var(--hex-height);
     display: flex;
     align-items: center;
@@ -325,8 +325,8 @@
     z-index: 0;
   }
   .attributes .attribute .stat > label {
-  	position: absolute;
-		bottom: 0;
+    position: absolute;
+        bottom: 0;
     height: var(--hat-height);
     width: calc(var(--hex-height)*1.73205/2);
     text-align: center;
@@ -338,26 +338,26 @@
     justify-content: center;
     background-color: var(--light-color);
     border-top: 1.5pt solid white;
-  	z-index: 1;
+    z-index: 1;
   }
   .attributes .attribute .reghex {
-  	height: var(--hex-height);
+    height: var(--hex-height);
     position: absolute;
     z-index: 0;
   }
   .attributes .attribute .stat > input:nth-of-type(1) {
-  	position: absolute;
-		top: calc((-0.5)*var(--hat-height));
+    position: absolute;
+        top: calc((-0.5)*var(--hat-height));
     height: calc(1.5*var(--hat-height));
     width: 4em;
     text-align: center;
     font-size: var(--small-font);
     border-radius: calc(9/7*0.5em) 0;
     border: 1.5pt solid white;
-  	z-index: 1;
+    z-index: 1;
   }
   .attributes .attribute .stat > input:nth-of-type(2) {
-  	height: 1.5em;
+    height: 1.5em;
     width: 2em;
     text-align: center;
     font-size: var(--big-font);
@@ -366,25 +366,25 @@
     z-index: 1;
   }
   .attributes .save {
-  	display: flex;
+    display: flex;
     align-items: center;
-  	position: relative;
+    position: relative;
     width: 3em;
     z-index: 0;
   }
   .attributes .save input[type=text] {
-  	height: 1.5em;
+    height: 1.5em;
     width: 3em;
     text-align: center;
   }
   .attributes .save input[type=checkbox] {
-  	position: absolute;
+    position: absolute;
     right: -0.5em;
     z-index: 1;
   }
 
   .movement {
-  	display: grid;
+    display: grid;
     grid-template-columns: auto auto;
     grid-template-rows: repeat(2,auto);
     grid-gap: 0.2em;
@@ -397,7 +397,7 @@
 
   .movement .initiative > span {text-align: center }
   .movement .initiative > input {
-  	height: 100%;
+    height: 100%;
     width: 3em;
     font-size: var(--big-font);
     text-align: center;
@@ -408,12 +408,12 @@
 
 
   .defense {
-		display: flex;
+        display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
   .defense .health  {
-  	display: grid;
+    display: grid;
     grid-template-columns: repeat(5,auto);
     grid-template-rows: repeat(2,auto);
     grid-gap: 0.5em;
@@ -422,16 +422,16 @@
     margin-bottom: 0.5em;
   }
   .defense .health .hit_points { grid-column: 1; grid-row: 1/3 }
-	.defense .health .d6 				 { grid-column: 2; grid-row: 1;}
-  .defense .health .d8 				 { grid-column: 3; grid-row: 1 }
-  .defense .health .d10 			 { grid-column: 4; grid-row: 1 }
-  .defense .health .d12 			 { grid-column: 5; grid-row: 1 }
+    .defense .health .d6                 { grid-column: 2; grid-row: 1;}
+  .defense .health .d8               { grid-column: 3; grid-row: 1 }
+  .defense .health .d10              { grid-column: 4; grid-row: 1 }
+  .defense .health .d12              { grid-column: 5; grid-row: 1 }
   .defense .health .resistance { grid-column: 2/6; grid-row: 2; width: 100%; align-self: start }
 
   .defense .hit_points { height: 100% }
   .defense .hit_points > span { text-align: center }
   .defense .hit_points > input {
-  	width: 3.5em;
+    width: 3.5em;
     height: 3.5em;
     border-radius: 50%;
     font-size: var(--big-font);
@@ -440,12 +440,12 @@
   .defense .hit_die > span, .hit_die input { text-align: center; width: 100% }
 
   .defense .armor {
-  	display: flex;
+    display: flex;
     justify-content: space-around;
   }
   .defense .AC {
-  	position: relative;
-		height: var(--hex-height);
+    position: relative;
+        height: var(--hex-height);
     width: var(--width);
     display: flex;
     align-items: center;
@@ -453,23 +453,23 @@
     z-index: 0;
   }
   .defense .AC > input:nth-of-type(1) {
-  	position: absolute;
-		top: 0;
+    position: absolute;
+        top: 0;
     height: var(--hat-height);
     width: calc(var(--hex-height)*1.73205/2);
     text-align: center;
     font-size: var(--small-font);
     border-radius: 0.5em 0 0 0;
     border-bottom: 1.5pt solid white;
-  	z-index: 1;
+    z-index: 1;
   }
   .defense .AC .reghex {
-  	height: var(--hex-height);
+    height: var(--hex-height);
     position: absolute;
     z-index: 0;
   }
   .defense .AC > input:nth-of-type(2) {
-  	height: 1.5em;
+    height: 1.5em;
     width: 2em;
     text-align: center;
     font-size: var(--big-font);
@@ -480,7 +480,7 @@
   }
 
   .attacks {
-  	display: flex;
+    display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
@@ -499,7 +499,7 @@
 
 
   .spell_stats {
-  	display: grid;
+    display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: auto auto;
     /* grid-gap: var(--grey-padding); */
@@ -515,7 +515,7 @@
   }
   .spell_stats .spell_stat > span { font-size: var(--small-font); text-align: center }
   .spell_stats .spell_stat > *:nth-child(2) {
-  	display: flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     height: var(--hex-height);
@@ -525,8 +525,8 @@
   }
   .spell_stats .reghex { position: absolute; z-index: 0 }
   .spell_stats .spell_stat input[type=text] {
-  	font-size: var(--big-font);
-  	width: 3em;
+    font-size: var(--big-font);
+    width: 3em;
     height: 1.5em;
     border: none;
     text-align: center;
@@ -534,7 +534,7 @@
     z-index: 1;
   }
   .proficiencies {
-  	display: grid;
+    display: grid;
     grid-template-columns: auto auto;
     grid-template-rows: auto auto;
     grid-gap: 0.2em;
@@ -551,7 +551,7 @@
   .proficiencies > .tools { grid-column: 2; grid-row: 1; }
   .proficiencies > .languages { grid-column: 2; grid-row: 2; }
   .proficiencies .proficiency input {
-  	width: 3em;
+    width: 3em;
     height: 100%;
     margin: 0;
     border: 1.4pt solid var(--medium-light-color);
@@ -572,7 +572,7 @@
 
 
   .skills {
-  	display: flex;
+    display: flex;
     flex-direction: column;
     justify-content: space-between;
     white-space: nowrap;
@@ -600,7 +600,7 @@
           <input type="text" class="line">
           <span>Name</span>
         </label>
-      	<label class="stack age">
+        <label class="stack age">
           <input type="text" class="line">
           <span>Age</span>
         </label>
@@ -608,7 +608,7 @@
           <input type="text" class="line">
           <span>Race</span>
         </label>
-      	<label class="stack gender">
+        <label class="stack gender">
           <input type="text"class="line">
           <span>Gender</span>
         </label>
@@ -651,10 +651,10 @@
     <div class="attributes">
       <div class="attribute">
         <div class="stat hex_calc">
-	        <div class="reghex"></div>
-  	      <input type="text" name="str_mod" class="grey" maxlength="2">
-    	  	<input type="text" id="str" maxlength="2">
-      	  <label for="str">Str</label>
+            <div class="reghex"></div>
+          <input type="text" name="str_mod" class="grey" maxlength="2">
+            <input type="text" id="str" maxlength="2">
+          <label for="str">Str</label>
         </div>
         <div class="save">
           <input type="checkbox" class="prof"/>
@@ -663,10 +663,10 @@
       </div>
       <div class="attribute">
         <div class="stat hex_calc">
-	        <div class="reghex"></div>
-  	      <input type="text" name="dex_mod" class="grey" maxlength="2">
-    	  	<input type="text" id="dex" maxlength="2">
-      	  <label for="dex">Dex</label>
+            <div class="reghex"></div>
+          <input type="text" name="dex_mod" class="grey" maxlength="2">
+            <input type="text" id="dex" maxlength="2">
+          <label for="dex">Dex</label>
         </div>
         <div class="save">
           <input type="checkbox" class="prof"/>
@@ -675,10 +675,10 @@
       </div>
       <div class="attribute">
         <div class="stat hex_calc">
-	        <div class="reghex"></div>
-  	      <input type="text" name="con_mod" class="grey" maxlength="2">
-    	  	<input type="text" id="con" maxlength="2">
-      	  <label for="con">Con</label>
+            <div class="reghex"></div>
+          <input type="text" name="con_mod" class="grey" maxlength="2">
+            <input type="text" id="con" maxlength="2">
+          <label for="con">Con</label>
         </div>
         <div class="save">
           <input type="checkbox" class="prof"/>
@@ -687,10 +687,10 @@
       </div>
       <div class="attribute">
         <div class="stat hex_calc">
-	        <div class="reghex"></div>
-  	      <input type="text" name="int_mod" class="grey" maxlength="2">
-    	  	<input type="text" id="int" maxlength="2">
-      	  <label for="int">Int</label>
+            <div class="reghex"></div>
+          <input type="text" name="int_mod" class="grey" maxlength="2">
+            <input type="text" id="int" maxlength="2">
+          <label for="int">Int</label>
         </div>
         <div class="save">
           <input type="checkbox" class="prof"/>
@@ -699,10 +699,10 @@
       </div>
       <div class="attribute">
         <div class="stat hex_calc">
-	        <div class="reghex"></div>
-  	      <input type="text" name="wis_mod" class="grey" maxlength="2">
-    	  	<input type="text" id="wis" maxlength="2">
-      	  <label for="wis">Wis</label>
+            <div class="reghex"></div>
+          <input type="text" name="wis_mod" class="grey" maxlength="2">
+            <input type="text" id="wis" maxlength="2">
+          <label for="wis">Wis</label>
         </div>
         <div class="save">
           <input type="checkbox" class="prof"/>
@@ -711,10 +711,10 @@
       </div>
       <div class="attribute">
         <div class="stat hex_calc">
-	        <div class="reghex"></div>
-  	      <input type="text" name="cha_mod" class="grey" maxlength="2">
-    	  	<input type="text" id="cha" maxlength="2">
-      	  <label for="cha">Cha</label>
+            <div class="reghex"></div>
+          <input type="text" name="cha_mod" class="grey" maxlength="2">
+            <input type="text" id="cha" maxlength="2">
+          <label for="cha">Cha</label>
         </div>
         <div class="save">
           <input type="checkbox" class="prof"/>
@@ -728,7 +728,7 @@
       <div class="health">
         <label class="stack hit_points">
           <span>Hit Points</span>
-       		<input type="text" name="HP" class="grey" maxlength="3">
+            <input type="text" name="HP" class="grey" maxlength="3">
         </label>
         <label class="stack hit_die d6">
           <span>d6</span>
@@ -764,7 +764,7 @@
           <input type="text" name="AC" maxlength="2">
         </div>
         <div class="AC hex_calc">
-	        <input type="text" name="AC_name" class="grey">
+            <input type="text" name="AC_name" class="grey">
           <div class="reghex"></div>
           <input type="text" name="AC" maxlength="2">
         </div>
@@ -776,7 +776,7 @@
           <span>Proficiency</span>
           <input type="text" name="proficieny" maxlength="2"/>
       </label>
-    	<label class="stack tools">
+        <label class="stack tools">
         <span>Tools</span>
         <input type="text" name="tools" class="grey">
       </label>
@@ -821,7 +821,7 @@
         </label>
         <label class="stack comment">
           <span></span>
-        	<input type="text" name="atk_comment" class="line">
+            <input type="text" name="atk_comment" class="line">
         </label>
       </div>
       <div class="attack">
@@ -843,7 +843,7 @@
         </label>
         <label class="stack comment">
           <span></span>
-        	<input type="text" name="atk_comment" class="line">
+            <input type="text" name="atk_comment" class="line">
         </label>
       </div>
       <div class="attack">
@@ -865,7 +865,7 @@
         </label>
         <label class="stack comment">
           <span></span>
-        	<input type="text" name="atk_comment" class="line">
+            <input type="text" name="atk_comment" class="line">
         </label>
       </div>
       <div class="attack">
@@ -887,7 +887,7 @@
         </label>
         <label class="stack comment">
           <span></span>
-        	<input type="text" name="atk_comment" class="line">
+            <input type="text" name="atk_comment" class="line">
         </label>
       </div>
     </div>
@@ -1041,7 +1041,7 @@
 
     <div class="combat_options table">
       <table>
-      	<tr>
+        <tr>
           <th>Combat Option</th>
           <th>Action Type</th>
         </tr>
