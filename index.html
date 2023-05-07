@@ -264,6 +264,7 @@
     grid-template-rows: repeat(2,auto);
     grid-gap: 0.5em;
     border: none;
+    padding: 0;
   }
   .head > .name { grid-column: 1 / 4; grid-row: 1; }
   .head > .age { grid-column: 4 / 5; grid-row: 1; }
@@ -277,7 +278,7 @@
   .head > .alignment { grid-column: 5 / 7; grid-row: 2; }
   .head > .lvl { grid-column: 7 / 13; grid-row: 2; }
 
-  .head > label { height: 3em; justify-content: flex-end }
+  .head > label { justify-content: flex-end }
   .head label > input { width: 100% }
 
   .attributes {
