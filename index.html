@@ -130,7 +130,7 @@
       grid-row: 2/6;
     }
 
-    .spell_stats {
+    .spell-stats {
       grid-column: 5 / 8;
       grid-row: 5;
     }
@@ -140,12 +140,12 @@
       grid-row: 5/7;
     }
 
-    .combat_options {
+    .combat-options {
       grid-column: 1 / 5;
       grid-row: 7;
     }
 
-    .limited_features {
+    .limited-features {
       grid-column: 1 / 5;
       grid-row: 8;
     }
@@ -155,7 +155,7 @@
       grid-row: 6/9;
     }
 
-    .hex_calc {
+    .hex-calc {
       --radius: calc(var(--hex-height)/2);
       /* circumcircle radius */
       --border-color: var(--dark-color);
@@ -595,7 +595,7 @@
       margin-bottom: 0.5em;
     }
 
-    .defense .health .hit_points {
+    .defense .health .hit-points {
       grid-column: 1;
       grid-row: 1/3
     }
@@ -627,15 +627,15 @@
       align-self: start
     }
 
-    .defense .hit_points {
+    .defense .hit-points {
       height: 100%
     }
 
-    .defense .hit_points>span {
+    .defense .hit-points>span {
       text-align: center
     }
 
-    .defense .hit_points>input {
+    .defense .hit-points>input {
       width: 3.5em;
       height: 3.5em;
       border-radius: 50%;
@@ -643,8 +643,8 @@
       text-align: center;
     }
 
-    .defense .hit_die>span,
-    .hit_die input {
+    .defense .hit-die>span,
+    .hit-die input {
       text-align: center;
       width: 100%
     }
@@ -739,47 +739,47 @@
       grid-row: 3;
     }
 
-    .spell_stats {
+    .spell-stats {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       grid-template-rows: auto auto;
       /* grid-gap: var(--grey-padding); */
     }
 
-    .spell_stats .spell_ability {
+    .spell-stats .spell-ability {
       grid-column: 1;
       grid-row: 1;
       justify-self: start
     }
 
-    .spell_stats .spell_save {
+    .spell-stats .spell-save {
       grid-column: 2;
       grid-row: 1
     }
 
-    .spell_stats .spell_atk {
+    .spell-stats .spell-atk {
       grid-column: 3;
       grid-row: 1;
       justify-self: end
     }
 
-    .spell_stats .focus {
+    .spell-stats .focus {
       grid-column: 1/4;
       grid-row: 2
     }
 
-    .spell_stats .spell_stat {
+    .spell-stats .spell-stat {
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
-    .spell_stats .spell_stat>label {
+    .spell-stats .spell-stat>label {
       font-size: var(--small-font);
       text-align: center
     }
 
-    .spell_stats .spell_stat>*:nth-child(2) {
+    .spell-stats .spell-stat>*:nth-child(2) {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -789,12 +789,12 @@
       margin: 0.2em 0 0.5em 0;
     }
 
-    .spell_stats .reghex {
+    .spell-stats .reghex {
       position: absolute;
       z-index: 0
     }
 
-    .spell_stats .spell_stat input[type=text] {
+    .spell-stats .spell-stat input[type=text] {
       font-size: var(--big-font);
       width: 3em;
       height: 1.5em;
@@ -868,15 +868,15 @@
       margin-bottom: calc(-1 * var(--grey-padding))
     }
 
-    .combat_options table {
+    .combat-options table {
       grid-template-columns: 1fr calc(2.5em + 3.5em + var(--grey-padding))
     }
 
-    .limited_features table {
+    .limited-features table {
       grid-template-columns: 1fr 2.5em 3.5em
     }
 
-    .limited_features tr td:nth-child(n+2) input {
+    .limited-features tr td:nth-child(n+2) input {
       text-align: center;
     }
 
@@ -999,74 +999,74 @@
 
     <div class="attributes">
       <div class="attribute">
-        <div class="stat hex_calc">
+        <div class="stat hex-calc">
           <div class="reghex"></div>
-          <input type="text" name="str_mod" class="grey" maxlength="2">
+          <input type="text" name="str-mod" class="grey" maxlength="2">
           <input type="text" id="str" maxlength="2">
           <label for="str">Str</label>
         </div>
         <div class="save">
-          <input type="text" class="grey" name="str_save" maxlength="3">
+          <input type="text" class="grey" name="str-save" maxlength="3">
           <input type="checkbox" class="prof">
         </div>
       </div>
       <div class="attribute">
-        <div class="stat hex_calc">
+        <div class="stat hex-calc">
           <div class="reghex"></div>
-          <input type="text" name="dex_mod" class="grey" maxlength="2">
+          <input type="text" name="dex-mod" class="grey" maxlength="2">
           <input type="text" id="dex" maxlength="2">
           <label for="dex">Dex</label>
         </div>
         <div class="save">
-          <input type="text" class="grey" name="dex_save" maxlength="3">
+          <input type="text" class="grey" name="dex-save" maxlength="3">
           <input type="checkbox" class="prof">
         </div>
       </div>
       <div class="attribute">
-        <div class="stat hex_calc">
+        <div class="stat hex-calc">
           <div class="reghex"></div>
-          <input type="text" name="con_mod" class="grey" maxlength="2">
+          <input type="text" name="con-mod" class="grey" maxlength="2">
           <input type="text" id="con" maxlength="2">
           <label for="con">Con</label>
         </div>
         <div class="save">
-          <input type="text" class="grey" name="con_save" maxlength="3">
+          <input type="text" class="grey" name="con-save" maxlength="3">
           <input type="checkbox" class="prof">
         </div>
       </div>
       <div class="attribute">
-        <div class="stat hex_calc">
+        <div class="stat hex-calc">
           <div class="reghex"></div>
-          <input type="text" name="int_mod" class="grey" maxlength="2">
+          <input type="text" name="int-mod" class="grey" maxlength="2">
           <input type="text" id="int" maxlength="2">
           <label for="int">Int</label>
         </div>
         <div class="save">
-          <input type="text" class="grey" name="int_save" maxlength="3">
+          <input type="text" class="grey" name="int-save" maxlength="3">
           <input type="checkbox" class="prof">
         </div>
       </div>
       <div class="attribute">
-        <div class="stat hex_calc">
+        <div class="stat hex-calc">
           <div class="reghex"></div>
-          <input type="text" name="wis_mod" class="grey" maxlength="2">
+          <input type="text" name="wis-mod" class="grey" maxlength="2">
           <input type="text" id="wis" maxlength="2">
           <label for="wis">Wis</label>
         </div>
         <div class="save">
-          <input type="text" class="grey" name="wis_save" maxlength="3">
+          <input type="text" class="grey" name="wis-save" maxlength="3">
           <input type="checkbox" class="prof">
         </div>
       </div>
       <div class="attribute">
-        <div class="stat hex_calc">
+        <div class="stat hex-calc">
           <div class="reghex"></div>
-          <input type="text" name="cha_mod" class="grey" maxlength="2">
+          <input type="text" name="cha-mod" class="grey" maxlength="2">
           <input type="text" id="cha" maxlength="2">
           <label for="cha">Cha</label>
         </div>
         <div class="save">
-          <input type="text" class="grey" name="cha_save" maxlength="3">
+          <input type="text" class="grey" name="cha-save" maxlength="3">
           <input type="checkbox" class="prof">
         </div>
       </div>
@@ -1075,23 +1075,23 @@
 
     <div class="defense">
       <div class="health">
-        <label class="stack hit_points">
+        <label class="stack hit-points">
           <span>Hit Points</span>
           <input type="text" name="HP" class="grey" maxlength="3">
         </label>
-        <label class="stack hit_die d6">
+        <label class="stack hit-die d6">
           <span>d6</span>
           <input type="text" name="d6" class="grey" maxlength="2">
         </label>
-        <label class="stack hit_die d8">
+        <label class="stack hit-die d8">
           <span>d8</span>
           <input type="text" name="d8" class="grey" maxlength="2">
         </label>
-        <label class="stack hit_die d10">
+        <label class="stack hit-die d10">
           <span>d10</span>
           <input type="text" name="d10" class="grey" maxlength="2">
         </label>
-        <label class="stack hit_die d12">
+        <label class="stack hit-die d12">
           <span>d12</span>
           <input type="text" name="d12" class="grey" maxlength="2">
         </label>
@@ -1102,18 +1102,18 @@
       </div>
 
       <div class="armor">
-        <div class="AC hex_calc">
-          <input type="text" name="AC_name" class="grey">
+        <div class="AC hex-calc">
+          <input type="text" name="AC-name" class="grey">
           <div class="reghex"></div>
           <input type="text" name="AC" maxlength="2">
         </div>
-        <div class="AC hex_calc">
-          <input type="text" name="AC_name" class="grey">
+        <div class="AC hex-calc">
+          <input type="text" name="AC-name" class="grey">
           <div class="reghex"></div>
           <input type="text" name="AC" maxlength="2">
         </div>
-        <div class="AC hex_calc">
-          <input type="text" name="AC_name" class="grey">
+        <div class="AC hex-calc">
+          <input type="text" name="AC-name" class="grey">
           <div class="reghex"></div>
           <input type="text" name="AC" maxlength="2">
         </div>
@@ -1154,113 +1154,113 @@
       <div class="attack">
         <label class="stack description">
           <span>Attack</span>
-          <input type="text" name="atk_description" class="grey">
+          <input type="text" name="atk-description" class="grey">
         </label>
         <label class="stack range">
           <span>Range</span>
-          <input type="text" name="atk_range" class="grey">
+          <input type="text" name="atk-range" class="grey">
         </label>
         <label class="stack bonus">
           <span>Atk Bonus</span>
-          <input type="text" name="atk_bonus" class="grey">
+          <input type="text" name="atk-bonus" class="grey">
         </label>
         <label class="stack damage">
           <span>Damage</span>
-          <input type="text" name="atk_damage" class="grey">
+          <input type="text" name="atk-damage" class="grey">
         </label>
         <label class="stack comment">
           <span></span>
-          <input type="text" name="atk_comment" class="line">
+          <input type="text" name="atk-comment" class="line">
         </label>
       </div>
       <div class="attack">
         <label class="stack description">
           <span>Attack</span>
-          <input type="text" name="atk_description" class="grey">
+          <input type="text" name="atk-description" class="grey">
         </label>
         <label class="stack range">
           <span>Range</span>
-          <input type="text" name="atk_range" class="grey">
+          <input type="text" name="atk-range" class="grey">
         </label>
         <label class="stack bonus">
           <span>Atk Bonus</span>
-          <input type="text" name="atk_bonus" class="grey">
+          <input type="text" name="atk-bonus" class="grey">
         </label>
         <label class="stack damage">
           <span>Damage</span>
-          <input type="text" name="atk_damage" class="grey">
+          <input type="text" name="atk-damage" class="grey">
         </label>
         <label class="stack comment">
           <span></span>
-          <input type="text" name="atk_comment" class="line">
+          <input type="text" name="atk-comment" class="line">
         </label>
       </div>
       <div class="attack">
         <label class="stack description">
           <span>Attack</span>
-          <input type="text" name="atk_description" class="grey">
+          <input type="text" name="atk-description" class="grey">
         </label>
         <label class="stack range">
           <span>Range</span>
-          <input type="text" name="atk_range" class="grey">
+          <input type="text" name="atk-range" class="grey">
         </label>
         <label class="stack bonus">
           <span>Atk Bonus</span>
-          <input type="text" name="atk_bonus" class="grey">
+          <input type="text" name="atk-bonus" class="grey">
         </label>
         <label class="stack damage">
           <span>Damage</span>
-          <input type="text" name="atk_damage" class="grey">
+          <input type="text" name="atk-damage" class="grey">
         </label>
         <label class="stack comment">
           <span></span>
-          <input type="text" name="atk_comment" class="line">
+          <input type="text" name="atk-comment" class="line">
         </label>
       </div>
       <div class="attack">
         <label class="stack description">
           <span>Attack</span>
-          <input type="text" name="atk_description" class="grey">
+          <input type="text" name="atk-description" class="grey">
         </label>
         <label class="stack range">
           <span>Range</span>
-          <input type="text" name="atk_range" class="grey">
+          <input type="text" name="atk-range" class="grey">
         </label>
         <label class="stack bonus">
           <span>Atk Bonus</span>
-          <input type="text" name="atk_bonus" class="grey">
+          <input type="text" name="atk-bonus" class="grey">
         </label>
         <label class="stack damage">
           <span>Damage</span>
-          <input type="text" name="atk_damage" class="grey">
+          <input type="text" name="atk-damage" class="grey">
         </label>
         <label class="stack comment">
           <span></span>
-          <input type="text" name="atk_comment" class="line">
+          <input type="text" name="atk-comment" class="line">
         </label>
       </div>
     </div>
 
-    <div class="spell_stats">
-      <div class="spell_stat spell_ability">
-        <label for="spell_ability">Spell <br> Casting Ability</label>
-        <div class="hex_calc">
+    <div class="spell-stats">
+      <div class="spell-stat spell-ability">
+        <label for="spell-ability">Spell <br> Casting Ability</label>
+        <div class="hex-calc">
           <div class="reghex"></div>
-          <input type="text" id="spell_ability" name="spell_ability">
+          <input type="text" id="spell-ability" name="spell-ability">
         </div>
       </div>
-      <div class="spell_stat spell_save">
-        <label for="spell_save">Spell <br> Save DC</label>
-        <div class="hex_calc">
+      <div class="spell-stat spell-save">
+        <label for="spell-save">Spell <br> Save DC</label>
+        <div class="hex-calc">
           <div class="reghex"></div>
-          <input type="text" id="spell_save" name="spell_save">
+          <input type="text" id="spell-save" name="spell-save">
         </div>
       </div>
-      <div class="spell_stat spell_atk">
-        <label for="spell_atk">Spell <br> Attack Bonus</label>
-        <div class="hex_calc">
+      <div class="spell-stat spell-atk">
+        <label for="spell-atk">Spell <br> Attack Bonus</label>
+        <div class="hex-calc">
           <div class="reghex"></div>
-          <input type="text" id="spell_atk" name="spell_atk">
+          <input type="text" id="spell-atk" name="spell-atk">
         </div>
       </div>
       <label class="stack focus">
@@ -1388,7 +1388,7 @@
       <textarea></textarea>
     </div>
 
-    <div class="combat_options table">
+    <div class="combat-options table">
       <table>
         <tr>
           <th>Combat Option</th>
@@ -1425,7 +1425,7 @@
       </table>
     </div>
 
-    <div class="limited_features table">
+    <div class="limited-features table">
       <table>
         <tr>
           <th>Limited Feature</th>
