@@ -14,9 +14,9 @@ To reach this conciseness we intentionally leave out all boxes which would repre
 ## Usage
 
 You can access The Good Sheet [here](https://tentawhat.github.io/good_sheet/).
-Enter your character data directly within the browser and save a pdf or print
-it using the built-in print menu of your browser (make sure to enable the
-option to print backgrounds).
+The character data can be filled directly within your browser.
+Using the built-in print menu of your browser you can then print it or save it
+as a pdf (make sure to enable the option to print backgrounds).
 
 ## License
 
