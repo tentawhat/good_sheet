@@ -585,8 +585,8 @@
   }
   .skill { height: 100%; margin: 0; display: flex; align-items: baseline; font-size: var(--normal-font); }
   .skill input.line { flex: 0 0 auto; width: 2em; margin-right: 0.5em; text-align: center }
-  .skill > span { margin: 0 0.5em; }
-  .skill span > span { margin-left: 0.2em; color: var(--medium-color) }
+  .skill > label { margin: 0 0.5em; }
+  .skill label > span { margin-left: 0.2em; color: var(--medium-color) }
   .skill input.comment { flex: 1 1 auto; width: 1em; margin: 0; text-align: left }
   .skill > input[type=checkbox] { align-self: center }
 
@@ -924,118 +924,118 @@
     </div>
 
     <div class="skills">
-      <label class="skill">
-        <input type="text" name="skl_bonus" class="line" maxlength="3">
+      <div class="skill">
+        <input id="skill-mod-acrobatics" type="text" class="line" maxlength="3">
         <input type="checkbox" class="prof">
-        <span>Acrobatics<span>(Dex)</span></span>
+        <label for="skill-mod-acrobatics">Acrobatics<span>(Dex)</span></label>
         <input type="text" class="line comment">
-      </label>
-      <label class="skill">
-        <input type="text" name="skl_bonus" class="line" maxlength="3">
+      </div>
+      <div class="skill">
+        <input id="skill-mod-animal-handling" type="text" class="line" maxlength="3">
         <input type="checkbox" class="prof">
-        <span>Animal Handling<span>(Wis)</span></span>
+        <label for="skill-mod-animal-handling">Animal Handling<span>(Wis)</span></label>
         <input type="text" class="line comment">
-      </label>
-      <label class="skill">
-        <input type="text" name="skl_bonus" class="line" maxlength="3">
+      </div>
+      <div class="skill">
+        <input id="skill-mod-arcana" type="text" class="line" maxlength="3">
         <input type="checkbox" class="prof">
-        <span>Arcana<span>(Int)</span></span>
+        <label for="skill-mod-arcana">Arcana<span>(Int)</span></label>
         <input type="text" class="line comment">
-      </label>
-      <label class="skill">
-        <input type="text" name="skl_bonus" class="line" maxlength="3">
+      </div>
+      <div class="skill">
+        <input id="skill-mod-athletics" type="text" class="line" maxlength="3">
         <input type="checkbox" class="prof">
-        <span>Athletics<span>(Str)</span></span>
+        <label for="skill-mod-athletics">Athletics<span>(Str)</span></label>
         <input type="text" class="line comment">
-      </label>
-      <label class="skill">
-        <input type="text" name="skl_bonus" class="line" maxlength="3">
+      </div>
+      <div class="skill">
+        <input id="skill-mod-deception" type="text" class="line" maxlength="3">
         <input type="checkbox" class="prof">
-        <span>Deception<span>(Cha)</span></span>
+        <label for="skill-mod-deception">Deception<span>(Cha)</span></label>
         <input type="text" class="line comment">
-      </label>
-      <label class="skill">
-        <input type="text" name="skl_bonus" class="line" maxlength="3">
+      </div>
+      <div class="skill">
+        <input id="skill-mod-history" type="text" class="line" maxlength="3">
         <input type="checkbox" class="prof">
-        <span>History<span>(Int)</span></span>
+        <label for="skill-mod-history">History<span>(Int)</span></label>
         <input type="text" class="line comment">
-      </label>
-      <label class="skill">
-        <input type="text" name="skl_bonus" class="line" maxlength="3">
+      </div>
+      <div class="skill">
+        <input id="skill-mod-insight" type="text" class="line" maxlength="3">
         <input type="checkbox" class="prof">
-        <span>Insight<span>(Wis)</span></span>
+        <label for="skill-mod-insight">Insight<span>(Wis)</span></label>
         <input type="text" class="line comment">
-      </label>
-      <label class="skill">
-        <input type="text" name="skl_bonus" class="line" maxlength="3">
+      </div>
+      <div class="skill">
+        <input id="skill-mod-intimidation" type="text" class="line" maxlength="3">
         <input type="checkbox" class="prof">
-        <span>Intimidation<span>(Cha)</span></span>
+        <label for="skill-mod-intimidation">Intimidation<span>(Cha)</span></label>
         <input type="text" class="line comment">
-      </label>
-      <label class="skill">
-        <input type="text" name="skl_bonus" class="line" maxlength="3">
+      </div>
+      <div class="skill">
+        <input id="skill-mod-investigation" type="text" class="line" maxlength="3">
         <input type="checkbox" class="prof">
-        <span>Investigation<span>(Int)</span></span>
+        <label for=id="skill-mod-investigation">Investigation<span>(Int)</span></label>
         <input type="text" class="line comment">
-      </label>
-      <label class="skill">
-        <input type="text" name="skl_bonus" class="line" maxlength="3">
+      </div>
+      <div class="skill">
+        <input id="skill-mod-medicine" type="text" class="line" maxlength="3">
         <input type="checkbox" class="prof">
-        <span>Medicine<span>(Wis)</span></span>
+        <label for="skill-mod-medicine">Medicine<span>(Wis)</span></label>
         <input type="text" class="line comment">
-      </label>
-      <label class="skill">
-        <input type="text" name="skl_bonus" class="line" maxlength="3">
+      </div>
+      <div class="skill">
+        <input id="skill-mod-nature" type="text" class="line" maxlength="3">
         <input type="checkbox" class="prof">
-        <span>Nature<span>(Int)</span></span>
+        <label for="skill-mod-nature">Nature<span>(Int)</span></label>
         <input type="text" class="line comment">
-      </label>
-      <label class="skill">
-        <input type="text" name="skl_bonus" class="line" maxlength="3">
+      </div>
+      <div class="skill">
+        <input id="skill-mod-perception" type="text" class="line" maxlength="3">
         <input type="checkbox" class="prof">
-        <span>Perception<span>(Wis)</span></span>
+        <label for="skill-mod-perception">Perception<span>(Wis)</span></label>
         <input type="text" class="line comment">
-      </label>
-      <label class="skill">
-        <input type="text" name="skl_bonus" class="line" maxlength="3">
+      </div>
+      <div class="skill">
+        <input id="skill-mod-performance" type="text" class="line" maxlength="3">
         <input type="checkbox" class="prof">
-        <span>Performance<span>(Cha)</span></span>
+        <label for="skill-mod-performance">Performance<span>(Cha)</span></label>
         <input type="text" class="line comment">
-      </label>
-      <label class="skill">
-        <input type="text" name="skl_bonus" class="line" maxlength="3">
+      </div>
+      <div class="skill">
+        <input id="skill-mod-persuasion" type="text" class="line" maxlength="3">
         <input type="checkbox" class="prof">
-        <span>Persuasion<span>(Cha)</span></span>
+        <label for="skill-mod-persuasion">Persuasion<span>(Cha)</span></label>
         <input type="text" class="line comment">
-      </label>
-      <label class="skill">
-        <input type="text" name="skl_bonus" class="line" maxlength="3">
+      </div>
+      <div class="skill">
+        <input id="skill-mod-relgion" type="text" class="line" maxlength="3">
         <input type="checkbox" class="prof">
-        <span>Religion<span>(Int)</span></span>
+        <label for="skill-mod-relgion">Religion<span>(Int)</span></label>
         <input type="text" class="line comment">
-      </label>
-      <label class="skill">
-        <input type="text" name="skl_bonus" class="line" maxlength="3">
+      </div>
+      <div class="skill">
+        <input id="skill-mod-sleight-of-hand" type="text" class="line" maxlength="3">
         <input type="checkbox" class="prof">
-        <span>Sleight of Hand<span>(Dex)</span></span>
+        <label for="skill-mod-sleight-of-hand">Sleight of Hand<span>(Dex)</span></label>
         <input type="text" class="line comment">
-      </label>
-      <label class="skill">
-        <input type="text" name="skl_bonus" class="line" maxlength="3">
+      </div>
+      <div class="skill">
+        <input id="skill-mod-stealth" type="text" class="line" maxlength="3">
         <input type="checkbox" class="prof">
-        <span>Stealth<span>(Dex)</span></span>
+        <label for="skill-mod-stealth">Stealth<span>(Dex)</span></label>
         <input type="text" class="line comment">
-      </label>
-      <label class="skill">
-        <input type="text" name="skl_bonus" class="line" maxlength="3">
+      </div>
+      <div class="skill">
+        <input id="skill-mod-survival" type="text" class="line" maxlength="3">
         <input type="checkbox" class="prof">
-        <span>Survival<span>(Wis)</span></span>
+        <label for="skill-mod-survival">Survival<span>(Wis)</span></label>
         <input type="text" class="line comment">
-      </label>
-      <label class="skill">
+      </div>
+      <div class="skill">
         <span>10+Mod</span>
-        <span>Passive Ability Check</span>
-      </label>
+        <label>Passive Ability Check</span>
+      </div>
     </div>
 
     <div class="traits">
