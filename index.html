@@ -518,7 +518,7 @@
     flex-direction: column;
     align-items: center;
   }
-  .spell_stats .spell_stat > span { font-size: var(--small-font); text-align: center }
+  .spell_stats .spell_stat > label { font-size: var(--small-font); text-align: center }
   .spell_stats .spell_stat > *:nth-child(2) {
     display: flex;
     align-items: center;
@@ -896,27 +896,27 @@
     </div>
 
     <div class="spell_stats">
-      <label class="spell_stat spell_ability">
-        <span>Spell <br> Casting Ability</span>
+      <div class="spell_stat spell_ability">
+        <label for="spell_ability">Spell <br> Casting Ability</label>
         <div class="hex_calc">
           <div class="reghex"></div>
-          <input type="text" name="spell_ability">
+          <input type="text" id="spell_ability" name="spell_ability">
         </div>
-      </label>
-      <label class="spell_stat spell_save">
-        <span>Spell <br> Save DC</span>
+      </div>
+      <div class="spell_stat spell_save">
+        <label for="spell_save">Spell <br> Save DC</label>
         <div class="hex_calc">
           <div class="reghex"></div>
-          <input type="text" name="spell_save">
+          <input type="text" id="spell_save" name="spell_save">
         </div>
-      </label>
-      <label class="spell_stat spell_atk">
-        <span>Spell <br> Attack Bonus</span>
+      </div>
+      <div class="spell_stat spell_atk">
+        <label for="spell_atk">Spell <br> Attack Bonus</label>
         <div class="hex_calc">
           <div class="reghex"></div>
-          <input type="text" name="spell_atk">
+          <input type="text" id="spell_atk" name="spell_atk">
         </div>
-      </label>
+      </div>
       <label class="stack focus">
         <span>Spellcasting Focus</span>
         <input type="text" name="focus" class="grey">
