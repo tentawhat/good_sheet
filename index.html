@@ -1,215 +1,292 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-<title>The Good Sheet</title>
-<style>
-  :root {
-    --sheet-bg: #fff;
-    --lines-font-size: 13pt;
-    --lines-padding: 5pt;
-    --lines-thickness: 1pt;
-    --box-padding: 5pt 2pt 2pt 5pt;
-    --grey-padding: 2pt;
-    --light-color: #ededed;
-    --medium-light-color: #bbb;
-    --medium-color: #777;
-    --dark-color: #333;
-    --border-color: #999;
-    --small-font: 7pt;
-    --normal-font: 9pt;
-    --big-font: 13pt;
-    --hex-height: 50pt;
-  }
-  @page {
-    size: A4;
-    margin: 0;
-  }
-  * { box-sizing: border-box; }
-  .sheet {
-    display: flex;
-    flex-direction: column;
-  }
-  body.A4 .sheet {
-    width: 210mm;
-    height: 297mm;
-    padding: 10mm;
-    overflow: hidden;
-    position: relative;
-    page-break-after: always;
-  }
-  /** For screen preview **/
-  @media screen {
-    body { background: #e0e0e0 }
-    .sheet {
-      background: var(--sheet-bg);
-      box-shadow: 0 .5mm 2mm rgba(0,0,0,.3);
-      margin: 5mm auto;
+  <title>The Good Sheet</title>
+  <style>
+    :root {
+      --sheet-bg: #fff;
+      --lines-font-size: 13pt;
+      --lines-padding: 5pt;
+      --lines-thickness: 1pt;
+      --box-padding: 5pt 2pt 2pt 5pt;
+      --grey-padding: 2pt;
+      --light-color: #ededed;
+      --medium-light-color: #bbb;
+      --medium-color: #777;
+      --dark-color: #333;
+      --border-color: #999;
+      --small-font: 7pt;
+      --normal-font: 9pt;
+      --big-font: 13pt;
+      --hex-height: 50pt;
     }
-  }
-  body {
-    margin: 0;
-    color: var(--dark-color);
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 10pt;
-  }
-  .grid > * {
-    border-width: 2pt 0 0 2pt;
-    border-style: solid;
-    border-color: var(--border-color);
-    border-radius: 5pt 0 0 0;
-    padding: var(--box-padding);
-    position: relative;
-  }
-  .grid > .titled { padding-top: 1.7em; }
-  .grid > .titled::before {
-    font-size: var(--big-font);
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translate(-50%, 0%);
-    white-space: nowrap;
-    padding-top: 0.2em;
-  }
 
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(10,1fr);
-    grid-template-rows: repeat(5,min-content) auto min-content min-content;
-    grid-gap: 7pt;
-  }
-  .logo                         { grid-column: 1 /  2; grid-row: 1; }
-  .head                         { grid-column: 2 / 11; grid-row: 1; }
+    @page {
+      size: A4;
+      margin: 0;
+    }
 
-  .attributes             { grid-column: 1 /  8; grid-row: 2; }
-  .defense                  { grid-column: 1 /  5; grid-row: 3/5; }
-  .proficiencies    { grid-column: 5 /  8; grid-row: 3; }
-  .movement                 { grid-column: 5 /  8; grid-row: 4; }
-  .skills                   { grid-column: 8 / 11; grid-row: 2/6; }
-  .spell_stats          { grid-column: 5 /  8; grid-row: 5; }
+    * {
+      box-sizing: border-box;
+    }
 
-  .attacks                  { grid-column: 1 /  5; grid-row: 5/7; }
-  .combat_options   { grid-column: 1 /  5; grid-row: 7; }
-  .limited_features { grid-column: 1 /  5; grid-row: 8; }
-  .traits           { grid-column: 5 / 11; grid-row: 6/9; }
+    .sheet {
+      display: flex;
+      flex-direction: column;
+    }
 
-  .hex_calc {
-    --radius: calc(var(--hex-height)/2); /* circumcircle radius */
-    --border-color: var(--dark-color);
-    --border-width: 1pt;
+    body.A4 .sheet {
+      width: 210mm;
+      height: 297mm;
+      padding: 10mm;
+      overflow: hidden;
+      position: relative;
+      page-break-after: always;
+    }
 
-    --width: calc(var(--radius) * var(--sqrt3));
-    --height: calc(2 * var(--radius));
-    --angledeg: 30;
-    --sqrt3: 1.73205;
-    --angle: calc(var(--angledeg) / 180 * 3.14159);
-    --cosangle: calc(1 - 1/2 * var(--angle)*var(--angle) + 1/24 * var(--angle)*var(--angle)*var(--angle)*var(--angle));
-    --tanangle: calc(var(--angle) + 1/3 * var(--angle)*var(--angle)*var(--angle) + 2/15 * var(--angle)*var(--angle)*var(--angle)*var(--angle)*var(--angle));
+    /** For screen preview **/
+    @media screen {
+      body {
+        background: #e0e0e0
+      }
 
-    --hat-height: calc(var(--tanangle) * var(--width) / 2);
-    --border-offset: calc(var(--tanangle) * var(--border-width));
-  }
-  .reghex-border {
-    width: var(--width);
-    height: var(--height);
-    background: var(--border-color);
-    clip-path:
-      polygon(
-        50% 0%,
-        0% var(--hat-height),
-        0% calc(100% - var(--hat-height)),
-        50% 100%,
-        100% calc(100% - var(--hat-height)),
-        100% var(--hat-height),
-        50% 0%,
-        50% calc(var(--border-width) / var(--cosangle)),
-        calc(100% - var(--border-width)) calc(var(--hat-height) + var(--border-offset)),
-        calc(100% - var(--border-width)) calc(100% - var(--hat-height) - var(--border-offset)),
-        50% calc(100% - var(--border-width) / var(--cosangle)),
-        var(--border-width) calc(100% - var(--hat-height) - var(--border-offset)),
-        var(--border-width) calc(var(--hat-height) + var(--border-offset)),
-        50% calc(var(--border-width) / var(--cosangle))
-      );
-  }
+      .sheet {
+        background: var(--sheet-bg);
+        box-shadow: 0 .5mm 2mm rgba(0, 0, 0, .3);
+        margin: 5mm auto;
+      }
+    }
 
-  .reghex {
-    width: var(--width);
-    height: var(--height);
-    background: var(--light-color);
-    clip-path:
-      polygon(
-        50% 0%,
-        0% var(--hat-height),
-        0% calc(100% - var(--hat-height)),
-        50% 100%,
-        100% calc(100% - var(--hat-height)),
-        100% var(--hat-height),
-        50% 0%)
-  }
+    body {
+      margin: 0;
+      color: var(--dark-color);
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 10pt;
+    }
 
-  table {
-    width: 100%;
-    border-spacing: var(--grey-padding) 0em;
-  }
-  table td, th { padding: 0; margin: 0 }
+    .grid>* {
+      border-width: 2pt 0 0 2pt;
+      border-style: solid;
+      border-color: var(--border-color);
+      border-radius: 5pt 0 0 0;
+      padding: var(--box-padding);
+      position: relative;
+    }
 
-  input {
-    background: transparent;
-    font-size: var(--normal-font);
-  }
-  /* general checkbox design:
+    .grid>.titled {
+      padding-top: 1.7em;
+    }
+
+    .grid>.titled::before {
+      font-size: var(--big-font);
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, 0%);
+      white-space: nowrap;
+      padding-top: 0.2em;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      grid-template-rows: repeat(5, min-content) auto min-content min-content;
+      grid-gap: 7pt;
+    }
+
+    .logo {
+      grid-column: 1 / 2;
+      grid-row: 1;
+    }
+
+    .head {
+      grid-column: 2 / 11;
+      grid-row: 1;
+    }
+
+    .attributes {
+      grid-column: 1 / 8;
+      grid-row: 2;
+    }
+
+    .defense {
+      grid-column: 1 / 5;
+      grid-row: 3/5;
+    }
+
+    .proficiencies {
+      grid-column: 5 / 8;
+      grid-row: 3;
+    }
+
+    .movement {
+      grid-column: 5 / 8;
+      grid-row: 4;
+    }
+
+    .skills {
+      grid-column: 8 / 11;
+      grid-row: 2/6;
+    }
+
+    .spell_stats {
+      grid-column: 5 / 8;
+      grid-row: 5;
+    }
+
+    .attacks {
+      grid-column: 1 / 5;
+      grid-row: 5/7;
+    }
+
+    .combat_options {
+      grid-column: 1 / 5;
+      grid-row: 7;
+    }
+
+    .limited_features {
+      grid-column: 1 / 5;
+      grid-row: 8;
+    }
+
+    .traits {
+      grid-column: 5 / 11;
+      grid-row: 6/9;
+    }
+
+    .hex_calc {
+      --radius: calc(var(--hex-height)/2);
+      /* circumcircle radius */
+      --border-color: var(--dark-color);
+      --border-width: 1pt;
+
+      --width: calc(var(--radius) * var(--sqrt3));
+      --height: calc(2 * var(--radius));
+      --angledeg: 30;
+      --sqrt3: 1.73205;
+      --angle: calc(var(--angledeg) / 180 * 3.14159);
+      --cosangle: calc(1 - 1/2 * var(--angle)*var(--angle) + 1/24 * var(--angle)*var(--angle)*var(--angle)*var(--angle));
+      --tanangle: calc(var(--angle) + 1/3 * var(--angle)*var(--angle)*var(--angle) + 2/15 * var(--angle)*var(--angle)*var(--angle)*var(--angle)*var(--angle));
+
+      --hat-height: calc(var(--tanangle) * var(--width) / 2);
+      --border-offset: calc(var(--tanangle) * var(--border-width));
+    }
+
+    .reghex-border {
+      width: var(--width);
+      height: var(--height);
+      background: var(--border-color);
+      clip-path:
+        polygon(50% 0%,
+          0% var(--hat-height),
+          0% calc(100% - var(--hat-height)),
+          50% 100%,
+          100% calc(100% - var(--hat-height)),
+          100% var(--hat-height),
+          50% 0%,
+          50% calc(var(--border-width) / var(--cosangle)),
+          calc(100% - var(--border-width)) calc(var(--hat-height) + var(--border-offset)),
+          calc(100% - var(--border-width)) calc(100% - var(--hat-height) - var(--border-offset)),
+          50% calc(100% - var(--border-width) / var(--cosangle)),
+          var(--border-width) calc(100% - var(--hat-height) - var(--border-offset)),
+          var(--border-width) calc(var(--hat-height) + var(--border-offset)),
+          50% calc(var(--border-width) / var(--cosangle)));
+    }
+
+    .reghex {
+      width: var(--width);
+      height: var(--height);
+      background: var(--light-color);
+      clip-path:
+        polygon(50% 0%,
+          0% var(--hat-height),
+          0% calc(100% - var(--hat-height)),
+          50% 100%,
+          100% calc(100% - var(--hat-height)),
+          100% var(--hat-height),
+          50% 0%)
+    }
+
+    table {
+      width: 100%;
+      border-spacing: var(--grey-padding) 0em;
+    }
+
+    table td,
+    th {
+      padding: 0;
+      margin: 0
+    }
+
+    input {
+      background: transparent;
+      font-size: var(--normal-font);
+    }
+
+    /* general checkbox design:
    * `::before{}` contains a single character label and
    * `::after` displays the checkmark
    */
-  input[type=checkbox] {
-    display: inline-block;
-    appearance: none;
-    -moz-appearance: none;
-    width: 1em;
-    height: 1em;
-    margin: 0;
-    border: 0.7pt solid var(--medium-light-color);
-    border-radius: 0.3em;
-    background: #fefefe;
-    position: relative;
-  }
-  input[type=checkbox]:hover { background: #f3f3f3 }
-  input[type=checkbox]::before {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 0.7em;
-    font-weight: bold;
-    color: var(--medium-light-color);
-  }
-  input[type=checkbox]:checked::after {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    content: '✗';
-    font-size: 1.5em;
-  }
+    input[type=checkbox] {
+      display: inline-block;
+      appearance: none;
+      -moz-appearance: none;
+      width: 1em;
+      height: 1em;
+      margin: 0;
+      border: 0.7pt solid var(--medium-light-color);
+      border-radius: 0.3em;
+      background: #fefefe;
+      position: relative;
+    }
 
-  input[type=checkbox].prof::before { content: 'P' }
+    input[type=checkbox]:hover {
+      background: #f3f3f3
+    }
 
-  input[type=text].grey {
-    height: 1.5em;
-    width: 100%;
-    padding: 0em 0.4em;
-    margin: 0em;
-    border: none;
-    background-color: var(--light-color);
-    border-radius: 0.5em 0;
-  }
-  input[type=text].line {
-    height: 1.5em;
-    padding: 0em 0.1em;
-    margin: 0;
-    border: none;
-    border-bottom: 0.7pt solid var(--medium-light-color);
-  }
-  /*
+    input[type=checkbox]::before {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 0.7em;
+      font-weight: bold;
+      color: var(--medium-light-color);
+    }
+
+    input[type=checkbox]:checked::after {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      content: '✗';
+      font-size: 1.5em;
+    }
+
+    input[type=checkbox].prof::before {
+      content: 'P'
+    }
+
+    input[type=text].grey {
+      height: 1.5em;
+      width: 100%;
+      padding: 0em 0.4em;
+      margin: 0em;
+      border: none;
+      background-color: var(--light-color);
+      border-radius: 0.5em 0;
+    }
+
+    input[type=text].line {
+      height: 1.5em;
+      padding: 0em 0.1em;
+      margin: 0;
+      border: none;
+      border-bottom: 0.7pt solid var(--medium-light-color);
+    }
+
+    /*
   textarea {
     --font-size: var(--normal-font);
     --spacing: 1.5;
@@ -229,434 +306,703 @@
     resize: none;
   }*/
 
-  textarea {
-    --font-size: var(--normal-font);
-    --spacing: 1.5;
-    --line-thickness: 0.7pt;
-    width: 100%;
-    font-size: var(--font-size);
-    height: 100px;
-    border: none;
-    background-image:
-      url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5 5"><rect x="0" y="4" width="5" height="1"/></svg>');
-    background-repeat: repeat;
-    background-position: 0 calc(var(--spacing)*var(--font-size)/2 - var(--line-thickness));
-    background-size: calc(var(--line-thickness)) calc(var(--spacing)*var(--font-size));
-    background-attachment: local;
-    line-height: calc(var(--spacing)*var(--font-size));
-    resize: none;
-  }
+    textarea {
+      --font-size: var(--normal-font);
+      --spacing: 1.5;
+      --line-thickness: 0.7pt;
+      width: 100%;
+      font-size: var(--font-size);
+      height: 100px;
+      border: none;
+      background-image:
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5 5"><rect x="0" y="4" width="5" height="1"/></svg>');
+      background-repeat: repeat;
+      background-position: 0 calc(var(--spacing)*var(--font-size)/2 - var(--line-thickness));
+      background-size: calc(var(--line-thickness)) calc(var(--spacing)*var(--font-size));
+      background-attachment: local;
+      line-height: calc(var(--spacing)*var(--font-size));
+      resize: none;
+    }
 
-  label.stack {
-    display: flex;
-    flex-direction: column;
-  }
-  label.stack > span, table th {
-    font-size: var(--small-font);
-    text-align: left;
-    font-weight: normal;
-    white-space: nowrap;
-  }
+    label.stack {
+      display: flex;
+      flex-direction: column;
+    }
 
-
-
-  .logo { width: 100%; height: 100%; border: none; padding: 0; align-self: center }
-  .head {
-    display: grid;
-    grid-template-columns: repeat(12,1fr);
-    grid-template-rows: repeat(2,auto);
-    grid-gap: 0.5em;
-    border: none;
-    padding: 0;
-  }
-  .head > .name { grid-column: 1 / 4; grid-row: 1; }
-  .head > .age { grid-column: 4 / 5; grid-row: 1; }
-  .head > .race { grid-column: 5 / 8; grid-row: 1; }
-  .head > .gender {grid-column: 8 / 9; grid-row: 1; }
-  .head > .size { grid-column: 9 / 11; grid-row: 1; }
-  .head > .height { grid-column: 11 / 12; grid-row: 1; }
-  .head > .weight { grid-column: 12 / 13; grid-row: 1; }
-  .head > .background { grid-column: 1 / 3; grid-row: 2; }
-  .head > .religion { grid-column: 3 / 5; grid-row: 2; }
-  .head > .alignment { grid-column: 5 / 7; grid-row: 2; }
-  .head > .lvl { grid-column: 7 / 13; grid-row: 2; }
-
-  .head > label { justify-content: flex-end }
-  .head label > input { width: 100% }
-
-  .attributes {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .attributes .hex {
-    --width: 4em;
-    --height: 6em;
-    --angledeg: 30;
-    --border-color: var(--medium-color);
-    --border-width: 3pt;
-    font-size: 12pt;
-
-    background:
-      linear-gradient(calc(var(--angledeg) * 1deg), var(--border-color) 0% var(--lingradoffset), transparent var(--lingradoffset) calc(100% - var(--lingradoffset)), var(--border-color) calc(100% - var(--lingradoffset)) 100%),
-      linear-gradient(calc(var(--angledeg) * -1deg), var(--border-color) 0% var(--lingradoffset), transparent var(--lingradoffset) calc(100% - var(--lingradoffset)), var(--border-color) calc(100% - var(--lingradoffset)) 100%),
-      linear-gradient(90deg, var(--border-color) 0% var(--border-width), transparent var(--border-width) calc(100% - var(--border-width)), var(--border-color) calc(100% - var(--border-width)) 100%),
-      radial-gradient(circle 15.3rem at 50% -50%, var(--light-color) 0% 33%, transparent 33% 100%),
-      radial-gradient(circle 15.3rem at 50% 150%, var(--light-color) 0% 33%, transparent 33% 100%),
-      var(--medium-color)
-      ;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .attributes .attribute {
-    --hex-height: 50pt;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .attributes .attribute .stat {
-    position: relative;
-        height: var(--hex-height);
-    width: var(--hex-height);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 0.5em;
-    margin-top: 0.5em;
-    z-index: 0;
-  }
-  .attributes .attribute .stat > label {
-    position: absolute;
-        bottom: 0;
-    height: var(--hat-height);
-    width: calc(var(--hex-height)*1.73205/2);
-    text-align: center;
-    font-size: var(--normal-font);
-    font-weight: bold;
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--light-color);
-    border-top: 1.5pt solid white;
-    z-index: 1;
-  }
-  .attributes .attribute .reghex {
-    height: var(--hex-height);
-    position: absolute;
-    z-index: 0;
-  }
-  .attributes .attribute .stat > input:nth-of-type(1) {
-    position: absolute;
-        top: calc((-0.5)*var(--hat-height));
-    height: calc(1.5*var(--hat-height));
-    width: 4em;
-    text-align: center;
-    font-size: var(--small-font);
-    border-radius: calc(9/7*0.5em) 0;
-    border: 1.5pt solid white;
-    z-index: 1;
-  }
-  .attributes .attribute .stat > input:nth-of-type(2) {
-    height: 1.5em;
-    width: 2em;
-    text-align: center;
-    font-size: var(--big-font);
-    border: none;
-    background: transparent;
-    z-index: 1;
-  }
-  .attributes .save {
-    display: flex;
-    align-items: center;
-    position: relative;
-    width: 3em;
-    z-index: 0;
-  }
-  .attributes .save input[type=text] {
-    height: 1.5em;
-    width: 3em;
-    text-align: center;
-  }
-  .attributes .save input[type=checkbox] {
-    position: absolute;
-    right: -0.5em;
-    z-index: 1;
-  }
-
-  .movement {
-    display: grid;
-    grid-template-columns: auto auto;
-    grid-template-rows: repeat(2,auto);
-    grid-gap: 0.2em;
-    justify-items: center;
-    align-items: center;
-  }
-  .movement .initiative { grid-column: 1; grid-row: 1/3; height: 100%; margin-right: 0.5em }
-  .movement .speed  { grid-column: 2; grid-row: 1 }
-  .movement .senses { grid-column: 2; grid-row: 2 }
-
-  .movement .initiative > span {text-align: center }
-  .movement .initiative > input {
-    height: 100%;
-    width: 3em;
-    font-size: var(--big-font);
-    text-align: center;
-  }
-  .movement .speed > input { width: 100%; }
-  .movement .swim > input { width: 100%; }
-  .movement .senses > input { width: 100%; }
+    label.stack>span,
+    table th {
+      font-size: var(--small-font);
+      text-align: left;
+      font-weight: normal;
+      white-space: nowrap;
+    }
 
 
-  .defense {
-        display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  .defense .health  {
-    display: grid;
-    grid-template-columns: repeat(5,auto);
-    grid-template-rows: repeat(2,auto);
-    grid-gap: 0.5em;
-    justify-items: center;
-    align-items: end;
-    margin-bottom: 0.5em;
-  }
-  .defense .health .hit_points { grid-column: 1; grid-row: 1/3 }
-    .defense .health .d6                 { grid-column: 2; grid-row: 1;}
-  .defense .health .d8               { grid-column: 3; grid-row: 1 }
-  .defense .health .d10              { grid-column: 4; grid-row: 1 }
-  .defense .health .d12              { grid-column: 5; grid-row: 1 }
-  .defense .health .resistance { grid-column: 2/6; grid-row: 2; width: 100%; align-self: start }
 
-  .defense .hit_points { height: 100% }
-  .defense .hit_points > span { text-align: center }
-  .defense .hit_points > input {
-    width: 3.5em;
-    height: 3.5em;
-    border-radius: 50%;
-    font-size: var(--big-font);
-    text-align: center;
-  }
-  .defense .hit_die > span, .hit_die input { text-align: center; width: 100% }
+    .logo {
+      width: 100%;
+      height: 100%;
+      border: none;
+      padding: 0;
+      align-self: center
+    }
 
-  .defense .armor {
-    display: flex;
-    justify-content: space-around;
-  }
-  .defense .AC {
-    position: relative;
-        height: var(--hex-height);
-    width: var(--width);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 0;
-  }
-  .defense .AC > input:nth-of-type(1) {
-    position: absolute;
-        top: 0;
-    height: var(--hat-height);
-    width: calc(var(--hex-height)*1.73205/2);
-    text-align: center;
-    font-size: var(--small-font);
-    border-radius: 0.5em 0 0 0;
-    border-bottom: 1.5pt solid white;
-    z-index: 1;
-  }
-  .defense .AC .reghex {
-    height: var(--hex-height);
-    position: absolute;
-    z-index: 0;
-  }
-  .defense .AC > input:nth-of-type(2) {
-    height: 1.5em;
-    width: 2em;
-    text-align: center;
-    font-size: var(--big-font);
-    margin-top: 4pt;
-    border: none;
-    background: transparent;
-    z-index: 1;
-  }
+    .head {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: repeat(2, auto);
+      grid-gap: 0.5em;
+      border: none;
+      padding: 0;
+    }
 
-  .attacks {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
+    .head>.name {
+      grid-column: 1 / 4;
+      grid-row: 1;
+    }
 
-  .attack {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: repeat(3, auto);
-    grid-gap: var(--grey-padding);
-  }
-  .attack > .description { grid-column: 1 / 10; grid-row: 1; }
-  .attack > .range { grid-column: 10 / 13; grid-row: 1; }
-  .attack > .range input { text-align: center; }
-  .attack > .bonus { grid-column: 1 / 3; grid-row: 2; }
-  .attack > .bonus input { text-align: center; }
-  .attack > .damage { grid-column: 3 / 13; grid-row: 2; }
-  .attack > .comment { grid-column: 1 / 13; grid-row: 3; }
+    .head>.age {
+      grid-column: 4 / 5;
+      grid-row: 1;
+    }
 
-  .spell_stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: auto auto;
-    /* grid-gap: var(--grey-padding); */
-  }
-  .spell_stats .spell_ability { grid-column: 1; grid-row: 1; justify-self: start }
-  .spell_stats .spell_save { grid-column: 2; grid-row: 1 }
-  .spell_stats .spell_atk { grid-column: 3; grid-row: 1; justify-self: end }
-  .spell_stats .focus { grid-column: 1/4; grid-row: 2 }
-  .spell_stats .spell_stat {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .spell_stats .spell_stat > label { font-size: var(--small-font); text-align: center }
-  .spell_stats .spell_stat > *:nth-child(2) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: var(--hex-height);
-    width: var(--width);
-    position: relative;
-    margin: 0.2em 0 0.5em 0;
-  }
-  .spell_stats .reghex { position: absolute; z-index: 0 }
-  .spell_stats .spell_stat input[type=text] {
-    font-size: var(--big-font);
-    width: 3em;
-    height: 1.5em;
-    border: none;
-    text-align: center;
-    background-color: transparent;
-    z-index: 1;
-  }
-  .proficiencies {
-    display: grid;
-    grid-template-columns: auto auto;
-    grid-template-rows: auto auto;
-    grid-gap: 0.2em;
-    justify-items: center;
-    align-items: center;
-  }
-  .proficiencies .proficiency {
-    height: 100%;
-    grid-column: 1;
-    grid-row: 1/3;
-    margin-right: 0.5em;
-  }
-  .proficiencies .proficiency > span {text-align: center }
-  .proficiencies > .tools { grid-column: 2; grid-row: 1; }
-  .proficiencies > .languages { grid-column: 2; grid-row: 2; }
-  .proficiencies .proficiency input {
-    width: 3em;
-    height: 100%;
-    margin: 0;
-    border: 1.4pt solid var(--medium-light-color);
-    border-radius: 30%;
-    background: #fefefe;
-    font-size: var(--big-font);
-    text-align: center;
-  }
-  .proficiencies .tools > input { width: 100% }
-  .proficiencies .languages > input { width: 100% }
+    .head>.race {
+      grid-column: 5 / 8;
+      grid-row: 1;
+    }
 
-  table { display: grid; gap: var(--grey-padding) }
-  thead, tbody, tr { display: contents }
-  th { margin-bottom: calc(-1 * var(--grey-padding)) }
+    .head>.gender {
+      grid-column: 8 / 9;
+      grid-row: 1;
+    }
 
-  .combat_options table { grid-template-columns: 1fr calc(2.5em + 3.5em + var(--grey-padding)) }
-  .limited_features table { grid-template-columns: 1fr 2.5em 3.5em }
-  .limited_features tr td:nth-child(n+2) input { text-align: center; }
+    .head>.size {
+      grid-column: 9 / 11;
+      grid-row: 1;
+    }
+
+    .head>.height {
+      grid-column: 11 / 12;
+      grid-row: 1;
+    }
+
+    .head>.weight {
+      grid-column: 12 / 13;
+      grid-row: 1;
+    }
+
+    .head>.background {
+      grid-column: 1 / 3;
+      grid-row: 2;
+    }
+
+    .head>.religion {
+      grid-column: 3 / 5;
+      grid-row: 2;
+    }
+
+    .head>.alignment {
+      grid-column: 5 / 7;
+      grid-row: 2;
+    }
+
+    .head>.lvl {
+      grid-column: 7 / 13;
+      grid-row: 2;
+    }
+
+    .head>label {
+      justify-content: flex-end
+    }
+
+    .head label>input {
+      width: 100%
+    }
+
+    .attributes {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .attributes .hex {
+      --width: 4em;
+      --height: 6em;
+      --angledeg: 30;
+      --border-color: var(--medium-color);
+      --border-width: 3pt;
+      font-size: 12pt;
+
+      background:
+        linear-gradient(calc(var(--angledeg) * 1deg), var(--border-color) 0% var(--lingradoffset), transparent var(--lingradoffset) calc(100% - var(--lingradoffset)), var(--border-color) calc(100% - var(--lingradoffset)) 100%),
+        linear-gradient(calc(var(--angledeg) * -1deg), var(--border-color) 0% var(--lingradoffset), transparent var(--lingradoffset) calc(100% - var(--lingradoffset)), var(--border-color) calc(100% - var(--lingradoffset)) 100%),
+        linear-gradient(90deg, var(--border-color) 0% var(--border-width), transparent var(--border-width) calc(100% - var(--border-width)), var(--border-color) calc(100% - var(--border-width)) 100%),
+        radial-gradient(circle 15.3rem at 50% -50%, var(--light-color) 0% 33%, transparent 33% 100%),
+        radial-gradient(circle 15.3rem at 50% 150%, var(--light-color) 0% 33%, transparent 33% 100%),
+        var(--medium-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .attributes .attribute {
+      --hex-height: 50pt;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .attributes .attribute .stat {
+      position: relative;
+      height: var(--hex-height);
+      width: var(--hex-height);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.5em;
+      margin-top: 0.5em;
+      z-index: 0;
+    }
+
+    .attributes .attribute .stat>label {
+      position: absolute;
+      bottom: 0;
+      height: var(--hat-height);
+      width: calc(var(--hex-height)*1.73205/2);
+      text-align: center;
+      font-size: var(--normal-font);
+      font-weight: bold;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--light-color);
+      border-top: 1.5pt solid white;
+      z-index: 1;
+    }
+
+    .attributes .attribute .reghex {
+      height: var(--hex-height);
+      position: absolute;
+      z-index: 0;
+    }
+
+    .attributes .attribute .stat>input:nth-of-type(1) {
+      position: absolute;
+      top: calc((-0.5)*var(--hat-height));
+      height: calc(1.5*var(--hat-height));
+      width: 4em;
+      text-align: center;
+      font-size: var(--small-font);
+      border-radius: calc(9/7*0.5em) 0;
+      border: 1.5pt solid white;
+      z-index: 1;
+    }
+
+    .attributes .attribute .stat>input:nth-of-type(2) {
+      height: 1.5em;
+      width: 2em;
+      text-align: center;
+      font-size: var(--big-font);
+      border: none;
+      background: transparent;
+      z-index: 1;
+    }
+
+    .attributes .save {
+      display: flex;
+      align-items: center;
+      position: relative;
+      width: 3em;
+      z-index: 0;
+    }
+
+    .attributes .save input[type=text] {
+      height: 1.5em;
+      width: 3em;
+      text-align: center;
+    }
+
+    .attributes .save input[type=checkbox] {
+      position: absolute;
+      right: -0.5em;
+      z-index: 1;
+    }
+
+    .movement {
+      display: grid;
+      grid-template-columns: auto auto;
+      grid-template-rows: repeat(2, auto);
+      grid-gap: 0.2em;
+      justify-items: center;
+      align-items: center;
+    }
+
+    .movement .initiative {
+      grid-column: 1;
+      grid-row: 1/3;
+      height: 100%;
+      margin-right: 0.5em
+    }
+
+    .movement .speed {
+      grid-column: 2;
+      grid-row: 1
+    }
+
+    .movement .senses {
+      grid-column: 2;
+      grid-row: 2
+    }
+
+    .movement .initiative>span {
+      text-align: center
+    }
+
+    .movement .initiative>input {
+      height: 100%;
+      width: 3em;
+      font-size: var(--big-font);
+      text-align: center;
+    }
+
+    .movement .speed>input {
+      width: 100%;
+    }
+
+    .movement .swim>input {
+      width: 100%;
+    }
+
+    .movement .senses>input {
+      width: 100%;
+    }
 
 
-  .skills {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    white-space: nowrap;
-  }
-  .skill { height: 100%; margin: 0; display: flex; align-items: baseline; font-size: var(--normal-font); }
-  .skill input.line { flex: 0 0 auto; width: 2em; margin-right: 0.5em; text-align: center }
-  .skill > label { margin: 0 0.5em; }
-  .skill label > span { margin-left: 0.2em; color: var(--medium-color) }
-  .skill input.comment { flex: 1 1 auto; width: 1em; margin: 0; text-align: left }
-  .skill > input[type=checkbox] { align-self: center }
+    .defense {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
 
-  .skill:last-child { align-items: center; color: var(--medium-color) }
-  .skill:last-child > span:first-child { width: 3.5em; margin: 0 }
+    .defense .health {
+      display: grid;
+      grid-template-columns: repeat(5, auto);
+      grid-template-rows: repeat(2, auto);
+      grid-gap: 0.5em;
+      justify-items: center;
+      align-items: end;
+      margin-bottom: 0.5em;
+    }
 
-  .traits, .traits textarea { height: 100% }
-</style>
+    .defense .health .hit_points {
+      grid-column: 1;
+      grid-row: 1/3
+    }
+
+    .defense .health .d6 {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .defense .health .d8 {
+      grid-column: 3;
+      grid-row: 1
+    }
+
+    .defense .health .d10 {
+      grid-column: 4;
+      grid-row: 1
+    }
+
+    .defense .health .d12 {
+      grid-column: 5;
+      grid-row: 1
+    }
+
+    .defense .health .resistance {
+      grid-column: 2/6;
+      grid-row: 2;
+      width: 100%;
+      align-self: start
+    }
+
+    .defense .hit_points {
+      height: 100%
+    }
+
+    .defense .hit_points>span {
+      text-align: center
+    }
+
+    .defense .hit_points>input {
+      width: 3.5em;
+      height: 3.5em;
+      border-radius: 50%;
+      font-size: var(--big-font);
+      text-align: center;
+    }
+
+    .defense .hit_die>span,
+    .hit_die input {
+      text-align: center;
+      width: 100%
+    }
+
+    .defense .armor {
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .defense .AC {
+      position: relative;
+      height: var(--hex-height);
+      width: var(--width);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 0;
+    }
+
+    .defense .AC>input:nth-of-type(1) {
+      position: absolute;
+      top: 0;
+      height: var(--hat-height);
+      width: calc(var(--hex-height)*1.73205/2);
+      text-align: center;
+      font-size: var(--small-font);
+      border-radius: 0.5em 0 0 0;
+      border-bottom: 1.5pt solid white;
+      z-index: 1;
+    }
+
+    .defense .AC .reghex {
+      height: var(--hex-height);
+      position: absolute;
+      z-index: 0;
+    }
+
+    .defense .AC>input:nth-of-type(2) {
+      height: 1.5em;
+      width: 2em;
+      text-align: center;
+      font-size: var(--big-font);
+      margin-top: 4pt;
+      border: none;
+      background: transparent;
+      z-index: 1;
+    }
+
+    .attacks {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .attack {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: repeat(3, auto);
+      grid-gap: var(--grey-padding);
+    }
+
+    .attack>.description {
+      grid-column: 1 / 10;
+      grid-row: 1;
+    }
+
+    .attack>.range {
+      grid-column: 10 / 13;
+      grid-row: 1;
+    }
+
+    .attack>.range input {
+      text-align: center;
+    }
+
+    .attack>.bonus {
+      grid-column: 1 / 3;
+      grid-row: 2;
+    }
+
+    .attack>.bonus input {
+      text-align: center;
+    }
+
+    .attack>.damage {
+      grid-column: 3 / 13;
+      grid-row: 2;
+    }
+
+    .attack>.comment {
+      grid-column: 1 / 13;
+      grid-row: 3;
+    }
+
+    .spell_stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: auto auto;
+      /* grid-gap: var(--grey-padding); */
+    }
+
+    .spell_stats .spell_ability {
+      grid-column: 1;
+      grid-row: 1;
+      justify-self: start
+    }
+
+    .spell_stats .spell_save {
+      grid-column: 2;
+      grid-row: 1
+    }
+
+    .spell_stats .spell_atk {
+      grid-column: 3;
+      grid-row: 1;
+      justify-self: end
+    }
+
+    .spell_stats .focus {
+      grid-column: 1/4;
+      grid-row: 2
+    }
+
+    .spell_stats .spell_stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .spell_stats .spell_stat>label {
+      font-size: var(--small-font);
+      text-align: center
+    }
+
+    .spell_stats .spell_stat>*:nth-child(2) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: var(--hex-height);
+      width: var(--width);
+      position: relative;
+      margin: 0.2em 0 0.5em 0;
+    }
+
+    .spell_stats .reghex {
+      position: absolute;
+      z-index: 0
+    }
+
+    .spell_stats .spell_stat input[type=text] {
+      font-size: var(--big-font);
+      width: 3em;
+      height: 1.5em;
+      border: none;
+      text-align: center;
+      background-color: transparent;
+      z-index: 1;
+    }
+
+    .proficiencies {
+      display: grid;
+      grid-template-columns: auto auto;
+      grid-template-rows: auto auto;
+      grid-gap: 0.2em;
+      justify-items: center;
+      align-items: center;
+    }
+
+    .proficiencies .proficiency {
+      height: 100%;
+      grid-column: 1;
+      grid-row: 1/3;
+      margin-right: 0.5em;
+    }
+
+    .proficiencies .proficiency>span {
+      text-align: center
+    }
+
+    .proficiencies>.tools {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .proficiencies>.languages {
+      grid-column: 2;
+      grid-row: 2;
+    }
+
+    .proficiencies .proficiency input {
+      width: 3em;
+      height: 100%;
+      margin: 0;
+      border: 1.4pt solid var(--medium-light-color);
+      border-radius: 30%;
+      background: #fefefe;
+      font-size: var(--big-font);
+      text-align: center;
+    }
+
+    .proficiencies .tools>input {
+      width: 100%
+    }
+
+    .proficiencies .languages>input {
+      width: 100%
+    }
+
+    table {
+      display: grid;
+      gap: var(--grey-padding)
+    }
+
+    thead,
+    tbody,
+    tr {
+      display: contents
+    }
+
+    th {
+      margin-bottom: calc(-1 * var(--grey-padding))
+    }
+
+    .combat_options table {
+      grid-template-columns: 1fr calc(2.5em + 3.5em + var(--grey-padding))
+    }
+
+    .limited_features table {
+      grid-template-columns: 1fr 2.5em 3.5em
+    }
+
+    .limited_features tr td:nth-child(n+2) input {
+      text-align: center;
+    }
+
+
+    .skills {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      white-space: nowrap;
+    }
+
+    .skill {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      align-items: baseline;
+      font-size: var(--normal-font);
+    }
+
+    .skill input.line {
+      flex: 0 0 auto;
+      width: 2em;
+      margin-right: 0.5em;
+      text-align: center
+    }
+
+    .skill>label {
+      margin: 0 0.5em;
+    }
+
+    .skill label>span {
+      margin-left: 0.2em;
+      color: var(--medium-color)
+    }
+
+    .skill input.comment {
+      flex: 1 1 auto;
+      width: 1em;
+      margin: 0;
+      text-align: left
+    }
+
+    .skill>input[type=checkbox] {
+      align-self: center
+    }
+
+    .skill:last-child {
+      align-items: center;
+      color: var(--medium-color)
+    }
+
+    .skill:last-child>span:first-child {
+      width: 3.5em;
+      margin: 0
+    }
+
+    .traits,
+    .traits textarea {
+      height: 100%
+    }
+  </style>
 </head>
 
 <body class="A4">
   <div class="sheet grid">
 
-    <svg xmlns="http://www.w3.org/2000/svg" class="logo" viewbox="0 0 528 528"><path d="M206.667 33.017c-18.7 3.82-32.972 22.279-46.667 34.327-32.537 28.622-64.822 57.314-96 87.433C51.336 167.009 30.96 182.033 26.656 200c-4.228 17.651 9.377 43.163 14.471 60L80.61 389.333c4.669 15.36 7.628 42.601 18.611 54.564 11.235 12.236 43.773 13.831 59.445 17.284 42.051 9.265 84.265 17.623 126.667 25.112 18.411 3.252 42.776 10.425 61.333 6.133 11.329-2.62 19.58-13.427 26.831-21.76 16.299-18.736 31.877-38.108 47.592-57.333l56.54-70.667c8.327-10.697 21.016-22.729 24.885-36 4.8-16.463-6.635-42.449-10.681-58.667-10.608-42.507-20.496-84.957-34.033-126.667-4.909-15.129-7.228-36.372-17.925-48.668C428.76 59.889 399.8 59.369 384 56.822L272 40.536c-21.02-3.674-43.829-11.913-65.333-7.519m12 5.65C276.015 51.681 337.587 57.093 396 64v1.333c-36.8 1.188-73.992 6.398-110.667 9.81-12.709 1.182-33.837 7.08-45.876 2.143-10.524-4.316-20.265-27.965-20.791-38.62m8 46.667c-61.304 35.25-121.154 78.364-185.333 108 3.658-16.295 22.868-29.768 34.667-40.611 28.395-26.091 56.081-52.887 85.333-78.049 9.171-7.888 29.071-31.217 42.492-28.979 13.332 2.223 19.271 28.955 22.841 39.638m224 180C431.813 256.376 415.915 240.263 400 227l-85.333-72.696C291.7 134.481 260.979 114.652 244 89.333c44.543-9.758 90.66-12.737 136.027-16.38 15.96-1.282 39.432-6.545 52.588 5.553 11.452 10.531 10.195 36.375 11.335 50.828 3.58 45.401 6.717 90.428 6.717 136M225.333 96l-24.723 118.667L168 357.333c-15.688-10.941-27.94-26.944-40.363-41.333L69 246.667c-6.666-8.001-29.974-28.352-26.102-39.792 4.88-14.42 34.092-26.543 46.435-33.937 44.588-26.715 89.704-53.275 136-76.937m13.333 6.667c46.513 34.669 90.896 72.353 134.667 110.408C395.639 232.467 422.999 251.624 440 276l-262.667 86.667c-2.112-27.525 9.285-59.964 15.491-86.667l27.363-114.667c4.911-19.093 8.331-41.589 18.48-58.667M456 136c19.64 45.203 33.604 105.425 36 154.667-10.953-3.2-25.141-9.783-30.863-20.277-6.165-11.308-3.755-29.911-3.812-42.389-.136-29.471-6.661-62.996-1.325-92m-146.657 58.576c-42.224 8.399-18.512 92.588 21.321 85.031 41.981-7.964 18.113-92.873-21.321-85.031m4.076 12.556c17.759-.648 26.261 28.457 25.844 42.199-.231 7.576-3.891 16.928-12.677 17.417-17.585.98-26.337-27.796-25.961-41.412.213-7.749 3.56-17.867 12.795-18.204M218.667 252L232 248c-.341-16.908 22.645-26.673 26.22-6.599 3.603 20.239-16.537 48.721-22.22 67.932L290.667 292l-4-12-29.333 9.333c6.636-16.707 21.019-40.455 12.365-58.573-8.245-17.263-33.616-18.916-45.639-4.747-6.356 7.491-6.213 16.776-5.393 25.987M40 224c32.706 32.795 61.211 70.156 89.629 106.667 7.989 10.264 27.47 27.673 27.767 41.333.163 7.477-6.568 14.585-10.959 20-11.937 14.719-25.083 31.603-42.437 40-19.809-43.801-31.125-92.783-45.241-138.667C52.31 272.371 39.483 246.028 40 224m406.667 58.667c-1.796 18.971-12.619 36.576-21 53.333-17.043 34.076-36.165 67.12-55.393 100-6.619 11.319-13.552 22.493-20.96 33.315-2.969 4.336-6.58 10.616-12.292 11.508-10.636 1.663-25.955-12.643-34.355-18.028-29.832-19.121-58.977-39.339-88-59.663-7.649-5.357-32.343-17.748-29.469-29.424 1.525-6.204 9.565-9.1 14.807-11.187 15.656-6.233 32.013-10.972 47.996-16.299l198.667-63.556m-93.333 198.667c6.641-17.811 17.719-34.012 26.777-50.667L434.705 332c5.64-10.092 17.845-44.784 32.132-41.701 7.845 1.692 25.865 9.093 24.4 19.249-2.404 16.652-24.863 33.82-34.892 46.452-21.968 27.667-42.545 56.408-64.612 84-11.587 14.487-22.732 31.003-38.4 41.333m-36 2.667v1.333c-67.505-7.639-139.437-25.667-204-46.667 10.326-14.879 24.412-27.344 37.333-39.947 5.053-4.931 11.167-11.952 18.667-12.703 13.66-1.368 32.004 16.173 42.667 23.324 35.743 23.972 69.915 50.22 105.333 74.659z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" class="logo" viewbox="0 0 528 528">
+      <path
+        d="M206.667 33.017c-18.7 3.82-32.972 22.279-46.667 34.327-32.537 28.622-64.822 57.314-96 87.433C51.336 167.009 30.96 182.033 26.656 200c-4.228 17.651 9.377 43.163 14.471 60L80.61 389.333c4.669 15.36 7.628 42.601 18.611 54.564 11.235 12.236 43.773 13.831 59.445 17.284 42.051 9.265 84.265 17.623 126.667 25.112 18.411 3.252 42.776 10.425 61.333 6.133 11.329-2.62 19.58-13.427 26.831-21.76 16.299-18.736 31.877-38.108 47.592-57.333l56.54-70.667c8.327-10.697 21.016-22.729 24.885-36 4.8-16.463-6.635-42.449-10.681-58.667-10.608-42.507-20.496-84.957-34.033-126.667-4.909-15.129-7.228-36.372-17.925-48.668C428.76 59.889 399.8 59.369 384 56.822L272 40.536c-21.02-3.674-43.829-11.913-65.333-7.519m12 5.65C276.015 51.681 337.587 57.093 396 64v1.333c-36.8 1.188-73.992 6.398-110.667 9.81-12.709 1.182-33.837 7.08-45.876 2.143-10.524-4.316-20.265-27.965-20.791-38.62m8 46.667c-61.304 35.25-121.154 78.364-185.333 108 3.658-16.295 22.868-29.768 34.667-40.611 28.395-26.091 56.081-52.887 85.333-78.049 9.171-7.888 29.071-31.217 42.492-28.979 13.332 2.223 19.271 28.955 22.841 39.638m224 180C431.813 256.376 415.915 240.263 400 227l-85.333-72.696C291.7 134.481 260.979 114.652 244 89.333c44.543-9.758 90.66-12.737 136.027-16.38 15.96-1.282 39.432-6.545 52.588 5.553 11.452 10.531 10.195 36.375 11.335 50.828 3.58 45.401 6.717 90.428 6.717 136M225.333 96l-24.723 118.667L168 357.333c-15.688-10.941-27.94-26.944-40.363-41.333L69 246.667c-6.666-8.001-29.974-28.352-26.102-39.792 4.88-14.42 34.092-26.543 46.435-33.937 44.588-26.715 89.704-53.275 136-76.937m13.333 6.667c46.513 34.669 90.896 72.353 134.667 110.408C395.639 232.467 422.999 251.624 440 276l-262.667 86.667c-2.112-27.525 9.285-59.964 15.491-86.667l27.363-114.667c4.911-19.093 8.331-41.589 18.48-58.667M456 136c19.64 45.203 33.604 105.425 36 154.667-10.953-3.2-25.141-9.783-30.863-20.277-6.165-11.308-3.755-29.911-3.812-42.389-.136-29.471-6.661-62.996-1.325-92m-146.657 58.576c-42.224 8.399-18.512 92.588 21.321 85.031 41.981-7.964 18.113-92.873-21.321-85.031m4.076 12.556c17.759-.648 26.261 28.457 25.844 42.199-.231 7.576-3.891 16.928-12.677 17.417-17.585.98-26.337-27.796-25.961-41.412.213-7.749 3.56-17.867 12.795-18.204M218.667 252L232 248c-.341-16.908 22.645-26.673 26.22-6.599 3.603 20.239-16.537 48.721-22.22 67.932L290.667 292l-4-12-29.333 9.333c6.636-16.707 21.019-40.455 12.365-58.573-8.245-17.263-33.616-18.916-45.639-4.747-6.356 7.491-6.213 16.776-5.393 25.987M40 224c32.706 32.795 61.211 70.156 89.629 106.667 7.989 10.264 27.47 27.673 27.767 41.333.163 7.477-6.568 14.585-10.959 20-11.937 14.719-25.083 31.603-42.437 40-19.809-43.801-31.125-92.783-45.241-138.667C52.31 272.371 39.483 246.028 40 224m406.667 58.667c-1.796 18.971-12.619 36.576-21 53.333-17.043 34.076-36.165 67.12-55.393 100-6.619 11.319-13.552 22.493-20.96 33.315-2.969 4.336-6.58 10.616-12.292 11.508-10.636 1.663-25.955-12.643-34.355-18.028-29.832-19.121-58.977-39.339-88-59.663-7.649-5.357-32.343-17.748-29.469-29.424 1.525-6.204 9.565-9.1 14.807-11.187 15.656-6.233 32.013-10.972 47.996-16.299l198.667-63.556m-93.333 198.667c6.641-17.811 17.719-34.012 26.777-50.667L434.705 332c5.64-10.092 17.845-44.784 32.132-41.701 7.845 1.692 25.865 9.093 24.4 19.249-2.404 16.652-24.863 33.82-34.892 46.452-21.968 27.667-42.545 56.408-64.612 84-11.587 14.487-22.732 31.003-38.4 41.333m-36 2.667v1.333c-67.505-7.639-139.437-25.667-204-46.667 10.326-14.879 24.412-27.344 37.333-39.947 5.053-4.931 11.167-11.952 18.667-12.703 13.66-1.368 32.004 16.173 42.667 23.324 35.743 23.972 69.915 50.22 105.333 74.659z" />
+    </svg>
 
     <div class="head">
-        <label class="stack name">
-          <input type="text" class="line">
-          <span>Name</span>
-        </label>
-        <label class="stack age">
-          <input type="text" class="line">
-          <span>Age</span>
-        </label>
-        <label class="stack race">
-          <input type="text" class="line">
-          <span>Race</span>
-        </label>
-        <label class="stack gender">
-          <input type="text" class="line">
-          <span>Gender</span>
-        </label>
-        <label class="stack size">
-          <input type="text" class="line">
-          <span>Size</span>
-        </label>
-        <label class="stack height">
-          <input type="text" class="line">
-          <span>Height</span>
-        </label>
-        <label class="stack weight">
-          <input type="text" class="line">
-          <span>Weight</span>
-        </label>
+      <label class="stack name">
+        <input type="text" class="line">
+        <span>Name</span>
+      </label>
+      <label class="stack age">
+        <input type="text" class="line">
+        <span>Age</span>
+      </label>
+      <label class="stack race">
+        <input type="text" class="line">
+        <span>Race</span>
+      </label>
+      <label class="stack gender">
+        <input type="text" class="line">
+        <span>Gender</span>
+      </label>
+      <label class="stack size">
+        <input type="text" class="line">
+        <span>Size</span>
+      </label>
+      <label class="stack height">
+        <input type="text" class="line">
+        <span>Height</span>
+      </label>
+      <label class="stack weight">
+        <input type="text" class="line">
+        <span>Weight</span>
+      </label>
 
-        <label class="stack background">
-          <input type="text" class="line">
-          <span>Background</span>
-        </label>
-        <label class="stack religion">
-          <input type="text" class="line">
-          <span>Religion / Patron / Deity</span>
-        </label>
-        <label class="stack alignment">
-          <input type="text" class="line">
-          <span>Alignment</span>
-        </label>
-        <label class="stack lvl">
-          <input type="text" class="line">
-          <span>Class (Level)</span>
-        </label>
+      <label class="stack background">
+        <input type="text" class="line">
+        <span>Background</span>
+      </label>
+      <label class="stack religion">
+        <input type="text" class="line">
+        <span>Religion / Patron / Deity</span>
+      </label>
+      <label class="stack alignment">
+        <input type="text" class="line">
+        <span>Alignment</span>
+      </label>
+      <label class="stack lvl">
+        <input type="text" class="line">
+        <span>Class (Level)</span>
+      </label>
     </div>
 
 
     <div class="attributes">
       <div class="attribute">
         <div class="stat hex_calc">
-            <div class="reghex"></div>
+          <div class="reghex"></div>
           <input type="text" name="str_mod" class="grey" maxlength="2">
-            <input type="text" id="str" maxlength="2">
+          <input type="text" id="str" maxlength="2">
           <label for="str">Str</label>
         </div>
         <div class="save">
@@ -666,9 +1012,9 @@
       </div>
       <div class="attribute">
         <div class="stat hex_calc">
-            <div class="reghex"></div>
+          <div class="reghex"></div>
           <input type="text" name="dex_mod" class="grey" maxlength="2">
-            <input type="text" id="dex" maxlength="2">
+          <input type="text" id="dex" maxlength="2">
           <label for="dex">Dex</label>
         </div>
         <div class="save">
@@ -678,9 +1024,9 @@
       </div>
       <div class="attribute">
         <div class="stat hex_calc">
-            <div class="reghex"></div>
+          <div class="reghex"></div>
           <input type="text" name="con_mod" class="grey" maxlength="2">
-            <input type="text" id="con" maxlength="2">
+          <input type="text" id="con" maxlength="2">
           <label for="con">Con</label>
         </div>
         <div class="save">
@@ -690,9 +1036,9 @@
       </div>
       <div class="attribute">
         <div class="stat hex_calc">
-            <div class="reghex"></div>
+          <div class="reghex"></div>
           <input type="text" name="int_mod" class="grey" maxlength="2">
-            <input type="text" id="int" maxlength="2">
+          <input type="text" id="int" maxlength="2">
           <label for="int">Int</label>
         </div>
         <div class="save">
@@ -702,9 +1048,9 @@
       </div>
       <div class="attribute">
         <div class="stat hex_calc">
-            <div class="reghex"></div>
+          <div class="reghex"></div>
           <input type="text" name="wis_mod" class="grey" maxlength="2">
-            <input type="text" id="wis" maxlength="2">
+          <input type="text" id="wis" maxlength="2">
           <label for="wis">Wis</label>
         </div>
         <div class="save">
@@ -714,9 +1060,9 @@
       </div>
       <div class="attribute">
         <div class="stat hex_calc">
-            <div class="reghex"></div>
+          <div class="reghex"></div>
           <input type="text" name="cha_mod" class="grey" maxlength="2">
-            <input type="text" id="cha" maxlength="2">
+          <input type="text" id="cha" maxlength="2">
           <label for="cha">Cha</label>
         </div>
         <div class="save">
@@ -731,7 +1077,7 @@
       <div class="health">
         <label class="stack hit_points">
           <span>Hit Points</span>
-            <input type="text" name="HP" class="grey" maxlength="3">
+          <input type="text" name="HP" class="grey" maxlength="3">
         </label>
         <label class="stack hit_die d6">
           <span>d6</span>
@@ -767,7 +1113,7 @@
           <input type="text" name="AC" maxlength="2">
         </div>
         <div class="AC hex_calc">
-            <input type="text" name="AC_name" class="grey">
+          <input type="text" name="AC_name" class="grey">
           <div class="reghex"></div>
           <input type="text" name="AC" maxlength="2">
         </div>
@@ -776,16 +1122,16 @@
 
     <div class="proficiencies">
       <label class="stack proficiency">
-          <span>Proficiency</span>
-          <input type="text" name="proficieny" maxlength="2">
+        <span>Proficiency</span>
+        <input type="text" name="proficieny" maxlength="2">
       </label>
-        <label class="stack tools">
+      <label class="stack tools">
         <span>Tools</span>
         <input type="text" name="tools" class="grey">
       </label>
       <label class="stack languages">
-          <span>Languages</span>
-          <input type="text" name="languages" class="grey">
+        <span>Languages</span>
+        <input type="text" name="languages" class="grey">
       </label>
     </div>
 
@@ -799,8 +1145,8 @@
         <input type="text" name="speed" class="grey" maxlength="6">
       </label>
       <label class="stack senses">
-          <span>Special Senses</span>
-          <input type="text" name="senses" class="grey">
+        <span>Special Senses</span>
+        <input type="text" name="senses" class="grey">
       </label>
     </div>
 
@@ -824,7 +1170,7 @@
         </label>
         <label class="stack comment">
           <span></span>
-            <input type="text" name="atk_comment" class="line">
+          <input type="text" name="atk_comment" class="line">
         </label>
       </div>
       <div class="attack">
@@ -846,7 +1192,7 @@
         </label>
         <label class="stack comment">
           <span></span>
-            <input type="text" name="atk_comment" class="line">
+          <input type="text" name="atk_comment" class="line">
         </label>
       </div>
       <div class="attack">
@@ -868,7 +1214,7 @@
         </label>
         <label class="stack comment">
           <span></span>
-            <input type="text" name="atk_comment" class="line">
+          <input type="text" name="atk_comment" class="line">
         </label>
       </div>
       <div class="attack">
@@ -890,7 +1236,7 @@
         </label>
         <label class="stack comment">
           <span></span>
-            <input type="text" name="atk_comment" class="line">
+          <input type="text" name="atk_comment" class="line">
         </label>
       </div>
     </div>
