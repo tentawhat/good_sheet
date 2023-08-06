@@ -38,17 +38,11 @@
       box-sizing: border-box;
     }
 
-    .sheet {
-      display: flex;
-      flex-direction: column;
-    }
-
-    body.A4 .sheet {
+    body .sheet {
       width: 210mm;
       height: 297mm;
       padding: 10mm;
       overflow: hidden;
-      position: relative;
       page-break-after: always;
     }
 
@@ -61,7 +55,7 @@
       .sheet {
         background: var(--sheet-bg);
         box-shadow: 0 .5mm 2mm rgba(0, 0, 0, .3);
-        margin: 5mm auto;
+        margin: 1rem auto;
       }
     }
 
@@ -72,13 +66,77 @@
       font-size: 10pt;
     }
 
+    input[type="checkbox"][id^="config-"] {
+      display: none
+    }
+    #config-darkmode:checked ~ * {
+      filter: invert(85%);
+    }
+
+    .sheet-latch {
+      margin: auto;
+      width: 210mm;
+      height: 0;
+      position: sticky;
+      top: 1rem;
+      z-index: 1;
+    }
+
+    .config-button {
+      border: 0;
+      margin: 0;
+      padding: 0;
+      position: fixed;
+      top: 5vmin;
+      right: 5vmin;
+      width: 15vmin;
+      height: 15vmin;
+      text-align: center;
+      font-size: 10vmin;
+      line-height: 10vmin;
+      z-index: 1;
+    }
+
+    .config-backdrop {
+      background: #999;
+      opacity: 0.8;
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1;
+    }
+    input#config-active:checked ~ .config-backdrop {
+      display: block;
+    }
+
+    .config-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 30rem;
+      height: 10rem;
+      margin: auto;
+      background: var(--sheet-bg);
+      box-shadow: 0 .5mm 2mm rgba(0, 0, 0, .3);
+      padding: 1rem;
+      z-index: 1;
+    }
+    input#config-active:checked ~ .config-modal {
+      display: block;
+    }
+
     .grid>* {
       border-width: 2pt 0 0 2pt;
       border-style: solid;
       border-color: var(--border-color);
       border-radius: 5pt 0 0 0;
       padding: var(--box-padding);
-      position: relative;
     }
 
     .grid>.titled {
@@ -926,8 +984,22 @@
   </style>
 </head>
 
-<body class="A4">
+<body>
+  <input id="config-active" type="checkbox">
+  <input id="config-darkmode" type="checkbox">
+
+  <div class="config-backdrop"></div>
+
+  <button class="config-button">
+    <label for="config-active">☰</label>
+  </button>
+
+  <div class="config-modal">
+    <label for="config-darkmode">Dark Mode</label>
+  </div>
+
   <div class="sheet grid">
+
 
     <svg xmlns="http://www.w3.org/2000/svg" class="logo" viewbox="0 0 528 528">
       <path
